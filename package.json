@@ -1,0 +1,21 @@
+{
+  "name": "projet_6_fisheye",
+  "description": "Mission : Créez un site accessible pour une plateforme de photographes.",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.css",
+    "prefix":"postcss ./css/style.css --use autoprefixer -d ./css/prefixed/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BaptisteJ24/Projet_6_FishEye.git"
+  },
+  "author": "Baptiste JAN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BaptisteJ24/Projet_6_FishEye/issues"
+  },
+  "homepage": "https://github.com/BaptisteJ24/Projet_6_FishEye#readme",
+  "browserslist": "last 4 versions"
+}
