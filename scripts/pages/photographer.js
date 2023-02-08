@@ -30,17 +30,17 @@ async function getMediaById() {
         console.log('mediaArray :', mediaArray);
         const mediaById = mediaArray.media.filter((obj) => obj.photographerId === JSON.parse(photographerId));
         console.log('mediaById :', mediaById);
-        return ({ media: mediaById })
+        return ({ medias: mediaById })
     }
     catch (error) {
         console.error('Erreur lors de la récupération des données : ', error);
     };
 }
 
-async function displayMedia(media) {
+async function displayMedia(medias) {
     const mediaSection = document.querySelector(".media__section");
 
-    media.forEach((media) => {
+    medias.forEach((media) => {
         const mediaModel = mediaFactory(media);
         const mediaDOM = mediaModel.getMediaDOM();
         mediaSection.append(mediaDOM);
@@ -48,8 +48,8 @@ async function displayMedia(media) {
 }
 
 async function initMedia() {
-    const { media } = await getMediaById();
-    displayMedia(media);
+    const { medias } = await getMediaById();
+    displayMedia(medias);
 }
 
 // event listener on load photographer page.

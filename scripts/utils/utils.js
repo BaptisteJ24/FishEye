@@ -4,7 +4,10 @@ function setAttributes(el, attrs) {
     }
 }
 
-async function getAllData(url) { // params: string. Return: array
+// const testArrowFunction = (string) => string.toUpperCase();
+
+// params: string. Return: array
+const getAllData = async (url) => { 
     try {
         const response = await fetch(url);
         const data = await response.json();
