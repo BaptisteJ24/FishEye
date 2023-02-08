@@ -4,7 +4,7 @@ function setAttributes(el, attrs) {
     }
 }
 
-async function getAllData(url) { // string
+async function getAllData(url) { // params: string. Return: array
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -15,7 +15,7 @@ async function getAllData(url) { // string
     }
 }
 
-async function getDataByProperty(url, property) { // string , string
+async function getDataByProperty(url, property) { // params: string, string. Return: array
     try {
         const data = await getAllData(url);
         const dataByProperty = data[property];
@@ -26,7 +26,7 @@ async function getDataByProperty(url, property) { // string , string
     }
 }
 
-async function getDataById(url, property = null, id, propertyId = 'id') { // string, string, number, string
+async function getDataById(url, property = null, id, propertyId = 'id') { // params: string, string, number, string. Return: array
     try {
         if (property === null) {
             const data = await getAllData(url);

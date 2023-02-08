@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "sass": "sass --watch ./sass/main.scss:./css/style.css",
-    "prefix":"postcss ./css/style.css --use autoprefixer -d ./css/prefixed/"
+    "prefix": "postcss ./css/style.css --use autoprefixer -d ./css/prefixed/",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,13 @@
     "url": "https://github.com/BaptisteJ24/Projet_6_FishEye/issues"
   },
   "homepage": "https://github.com/BaptisteJ24/Projet_6_FishEye#readme",
-  "browserslist": "last 4 versions"
+  "browserslist": "last 4 versions",
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^9.1.2",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
 }

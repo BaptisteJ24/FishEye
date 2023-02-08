@@ -1,24 +1,40 @@
-async function getMediaById(photographerId) {
-    //  Requête fetch pour récupérer les données des médias dans data/media.json
+async function getMedia() { // return : object
     try {
-        const mediaArray = await getDataById('../../data/photographers.json', 'media', photographerId, 'photographerId');
+        const mediaArray = await getDataByProperty('../../data/photographers.json', 'media');
+        console.log('mediaArray :', mediaArray);
         return ({ media: mediaArray })
+
+    }
+    catch (error) {
+        console.error('Erreur lors de la récupération des données : ', error);
+    }
+}
+
+async function getPhotographerId() { // return : number (id)
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        console.log('id :', id);
+        return id;
+    }
+    catch (error) {
+        console.error('Erreur lors de la récupération de l\'id : ', error);
+    }
+}
+
+async function getMediaById() {
+    try {
+        const photographerId = await getPhotographerId();
+        console.log('photographerId :', photographerId);
+        const mediaArray = await getMedia();
+        console.log('mediaArray :', mediaArray);
+        const mediaById = mediaArray.media.filter((obj) => obj.photographerId === JSON.parse(photographerId));
+        console.log('mediaById :', mediaById);
+        return ({ media: mediaById })
     }
     catch (error) {
         console.error('Erreur lors de la récupération des données : ', error);
     };
-}
-
-async function getMedia() {
-    try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id');
-        return await getMediaById(id);
-    }
-    catch (error) {
-        console.error('Erreur lors de la récupération des données : ', error);
-    }
-
 }
 
 async function displayMedia(media) {
@@ -27,18 +43,16 @@ async function displayMedia(media) {
     media.forEach((media) => {
         const mediaModel = mediaFactory(media);
         const mediaDOM = mediaModel.getMediaDOM();
-        mediaSection.appendChild(mediaDOM);
+        mediaSection.append(mediaDOM);
     });
 }
 
 async function initMedia() {
-    // Récupère les datas des médias
-    const { media } = await getMedia();
+    const { media } = await getMediaById();
     displayMedia(media);
 }
 
-initMedia();
-
+// event listener on load photographer page.
 if (window.location.pathname === '/views/photographer.html') {
-    window.addEventListener('load', getMedia);
-}//Mettre le code JavaScript lié à la page photographer.html
+    window.addEventListener('load', initMedia);
+}
