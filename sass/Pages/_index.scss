@@ -1,4 +1,4 @@
-.index-h1 {
+.index-title {
     color: #901C1C;
     font-size: 36px;
     margin-right: 100px;
@@ -38,6 +38,9 @@
     &__title {
         color: #D3573C;
         font-size: 36px;
+        &--xlarge {
+            font-size: 64px;
+        }
     }
 
     &__description {

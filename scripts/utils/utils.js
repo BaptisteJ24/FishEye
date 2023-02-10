@@ -1,4 +1,14 @@
+/**
+ * description : set attributes to an element
+ * @param {HTMLElement} el - element to set attributes
+ * @param {Object} attrs - attributes to set. It's an object with key and value.
+ * @returns {HTMLElement} - element with attributes
+ * @example setAttributes(img, {"src" : ./images/img.png, "class" : "img" });
+ */
 function setAttributes(el, attrs) {
+    if (typeof attrs !== 'object') {
+        throw new Error('attrs is not an object');
+    }
     for (var key in attrs) {
         el.setAttribute(key, attrs[key]);
     }
@@ -7,7 +17,7 @@ function setAttributes(el, attrs) {
 // const testArrowFunction = (string) => string.toUpperCase();
 
 // params: string. Return: array
-const getAllData = async (url) => { 
+const getAllData = async (url) => {
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -18,7 +28,7 @@ const getAllData = async (url) => {
     }
 }
 
-async function getDataByProperty(url, property) { // params: string, string. Return: array
+const getDataByProperty = async (url, property) => { // params: string, string. Return: array
     try {
         const data = await getAllData(url);
         const dataByProperty = data[property];
@@ -29,7 +39,7 @@ async function getDataByProperty(url, property) { // params: string, string. Ret
     }
 }
 
-async function getDataById(url, property = null, id, propertyId = 'id') { // params: string, string, number, string. Return: array
+const getDataById = async (url, property = null, id, propertyId = 'id') => { // params: string, string, number, string. Return: array
     try {
         if (property === null) {
             const data = await getAllData(url);
@@ -40,7 +50,7 @@ async function getDataById(url, property = null, id, propertyId = 'id') { // par
 
         const dataByProperty = await getDataByProperty(url, property);
         const dataById = dataByProperty.filter((obj) => obj[propertyId] === JSON.parse(id));
-        
+
         return dataById;
     }
     catch (error) {
@@ -48,3 +58,4 @@ async function getDataById(url, property = null, id, propertyId = 'id') { // par
     }
 }
 
+export { setAttributes, getAllData, getDataByProperty, getDataById };

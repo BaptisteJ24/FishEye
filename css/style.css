@@ -52,7 +52,7 @@ a {
   margin-left: 100px;
 }
 
-.index-h1 {
+.index-title {
   color: #901C1C;
   font-size: 36px;
   margin-right: 100px;
@@ -87,6 +87,9 @@ a {
 .photographer__title {
   color: #D3573C;
   font-size: 36px;
+}
+.photographer__title--xlarge {
+  font-size: 64px;
 }
 .photographer__description {
   text-align: center;

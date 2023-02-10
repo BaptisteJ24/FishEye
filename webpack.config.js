@@ -1,12 +1,13 @@
 const path = require('path');
+const glob = require('glob');
 
 module.exports = {
-    mode: 'development',
-    entry: './scripts/main.js',
+    entry: glob.sync("./scripts/**/*.js"),
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'app.bundle.js'
+        path: path.resolve(__dirname, './dist'),
+        filename: 'bundle.js'
     },
+    mode: 'development',
     module: {
         rules: [{
             test: /\.js$/,

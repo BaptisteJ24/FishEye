@@ -1,6 +1,8 @@
+import { setAttributes } from '../utils/utils.js';
+
 function mediaFactory(data) {
     const { id, photographerId, title, image, likes, date, price, video } = data;
-    
+
     const picture = `../assets/images/${photographerId}/${image}`;
     const videoSrc = `../assets/images/${photographerId}/${video}`;
     const dateOfCreation = `${date}`;
@@ -8,7 +10,7 @@ function mediaFactory(data) {
     const likesOfMedia = `${likes}`;
 
 
-    getMediaDOM = () => {
+    const getMediaDOM = () => {
         const article = document.createElement('article');
         article.setAttribute("class", "article media__article");
 
@@ -44,3 +46,5 @@ function mediaFactory(data) {
     return { id, photographerId, title, picture, videoSrc, dateOfCreation, priceOfMedia, likesOfMedia, getMediaDOM }
 
 }
+
+export { mediaFactory };

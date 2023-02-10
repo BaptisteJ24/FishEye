@@ -1,3 +1,7 @@
+import { setAttributes, getAllData, getDataByProperty, getDataById } from '../utils/utils.js';
+import { photographerFactory } from '../factories/photographer.js';
+
+const currentPage = document.querySelector('body').dataset.page;
 
 async function getPhotographers() {
     //  Requête fetch pour récupérer les données des photographes dans data/photographers.json
@@ -26,4 +30,7 @@ async function initPhotographers() {
     displayData(photographers);
 };
 
-initPhotographers();
+if (currentPage === 'index') {
+    window.addEventListener('load', initPhotographers());
+}
+
