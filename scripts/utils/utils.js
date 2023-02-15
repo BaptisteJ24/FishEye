@@ -1,11 +1,11 @@
 /**
- * description : set attributes to an element
- * @param {HTMLElement} el - element to set attributes
+ * description : set attributes to an element.
+ * @param {HTMLElement} el - element to set attributes.
  * @param {Object} attrs - attributes to set. It's an object with key and value.
- * @returns {HTMLElement} - element with attributes
+ * @returns {HTMLElement} - element with attributes.
  * @example setAttributes(img, {"src" : ./images/img.png, "class" : "img" });
  */
-function setAttributes(el, attrs) {
+const setAttributes = (el, attrs) => {
     if (typeof attrs !== 'object') {
         throw new Error('attrs is not an object');
     }
@@ -14,7 +14,15 @@ function setAttributes(el, attrs) {
     }
 }
 
-// const testArrowFunction = (string) => string.toUpperCase();
+/**
+ * description : get the current page with the data-page attribute of the body.
+ * @returns {string} - current page name.
+ */
+const getCurrentPage = () => {
+    const currentPage = document.querySelector('body').dataset.page;
+    return currentPage;
+}
+
 
 // params: string. Return: array
 const getAllData = async (url) => {
@@ -58,4 +66,4 @@ const getDataById = async (url, property = null, id, propertyId = 'id') => { // 
     }
 }
 
-export { setAttributes, getAllData, getDataByProperty, getDataById };
+export { setAttributes, getCurrentPage, getAllData, getDataByProperty, getDataById };

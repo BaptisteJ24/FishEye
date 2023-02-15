@@ -1,13 +1,10 @@
-import { setAttributes, getAllData, getDataByProperty, getDataById } from '../utils/utils.js';
+import { setAttributes, getCurrentPage, getAllData, getDataByProperty, getDataById } from '../utils/utils.js';
 import { photographerFactory } from '../factories/photographer.js';
 import { mediaFactory } from '../factories/media.js';
-
-const currentPage = document.querySelector('body').dataset.page;
 
 const getMedia = async () => { // return : object
     try {
         const mediaArray = await getDataByProperty('../../data/photographers.json', 'media');
-        console.log('mediaArray :', mediaArray);
         return ({ media: mediaArray })
 
     }
@@ -20,7 +17,6 @@ const getPhotographerId = async () => { // return : number (id)
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('id');
-        console.log('id :', id);
         return id;
     }
     catch (error) {
@@ -31,9 +27,7 @@ const getPhotographerId = async () => { // return : number (id)
 const getPhotographerDetailsById = async () => { // return : object
     try {
         const photographerId = await getPhotographerId();
-        console.log('photographerId :', photographerId);
-        const photographerDetails = await getDataById('../../data/photographers.json', 'photographers' , photographerId);
-        console.log('photographerDetails :', photographerDetails);
+        const photographerDetails = await getDataById('../../data/photographers.json', 'photographers', photographerId);
         return photographerDetails;
     }
     catch (error) {
@@ -45,11 +39,8 @@ const getPhotographerDetailsById = async () => { // return : object
 const getMediaById = async () => {
     try {
         const photographerId = await getPhotographerId();
-        console.log('photographerId :', photographerId);
         const mediaArray = await getMedia();
-        console.log('mediaArray :', mediaArray);
         const mediaById = mediaArray.media.filter((obj) => obj.photographerId === JSON.parse(photographerId));
-        console.log('mediaById :', mediaById);
         return ({ medias: mediaById })
     }
     catch (error) {
@@ -60,8 +51,9 @@ const getMediaById = async () => {
 const displayMedia = async (medias) => {
     const mediaSection = document.querySelector(".media__section");
     medias.forEach((media) => {
+        const type = media.image ? 'img' : 'video';
         const mediaModel = mediaFactory(media);
-        const mediaDOM = mediaModel.getMediaDOM(); // getMediaDOM(img or video)
+        const mediaDOM = mediaModel.getMediaDOM(type); // getMediaDOM(img or video)
         mediaSection.append(mediaDOM);
     });
 }
@@ -88,7 +80,30 @@ const initPhotographerDetails = async () => {
 }
 
 // event listener on load photographer page.
-if (currentPage === 'photographer') {
-    window.addEventListener('load', initMedia);
-    window.addEventListener('load', initPhotographerDetails);
+
+if (getCurrentPage() === 'photographer') {
+    window.addEventListener('load', () => { 
+        initMedia(); 
+        initPhotographerDetails();
+    });
 }
+
+
+// function focusNextListItem(direction) {
+//   const activeElementId = document.activeElement.id;
+//   if (activeElementId === "dropdown__selected") {
+//     document.querySelector(`#${listItemIds[0]}`).focus();
+//   } 
+//   else {
+//     const currentActiveElementIndex = listItemIds.indexOf(activeElementId);
+//   }
+// }
+
+
+// sort media by Likes, Date or Title
+// document.querySelector('.sort__option--chevron').addEventListener('click', () => {
+//     const listOptions = document.querySelectorAll('.sort__option--border');
+//     listOptions.forEach((option) => {
+//         option.classList.toggle('hide');
+//     })
+// });

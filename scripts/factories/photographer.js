@@ -9,35 +9,35 @@ const photographerFactory = (data) => {
     const pricePerDay = `${price}€/jour`;
 
     const getUserCardDOM = () => {
-        const article = document.createElement( 'article' );
-        article.setAttribute("class", "article photographer__article");
+        const article = document.createElement('article');
+        article.setAttribute("class", "article photographers__article");
 
-        const divLink = document.createElement( 'div' );
-        divLink.setAttribute("class", "photographer__link");
+        const divLink = document.createElement('div');
+        divLink.setAttribute("class", "photographers__link");
         divLink.addEventListener("click", () => {
             window.location.href = `./views/photographer.html?id=${id}`;
         });
 
-        const imgPhotographer = document.createElement( 'img' );
-        setAttributes(imgPhotographer, {"src" : picture, "alt" : name, "class" : "photographer__img" });
+        const imgPhotographer = document.createElement('img');
+        setAttributes(imgPhotographer, { "src": picture, "alt": name, "class": "photographers__img" });
 
-        const h2 = document.createElement( 'h2' );
-        h2.setAttribute("class", "h2 photographer__title");
+        const h2 = document.createElement('h2');
+        h2.setAttribute("class", "h2 photographers__title");
         h2.textContent = name;
 
-        const divDescription = document.createElement( 'div' );
-        divDescription.setAttribute("class", "photographer__description");
+        const divDescription = document.createElement('div');
+        divDescription.setAttribute("class", "photographers__description");
 
-        const textLocation = document.createElement( 'p' );
-        textLocation.setAttribute("class", "photographer__location");
+        const textLocation = document.createElement('p');
+        textLocation.setAttribute("class", "photographers__location");
         textLocation.textContent = location;
 
-        const textTagLine = document.createElement( 'p' );
-        textTagLine.setAttribute("class", "photographer__tag-line");
+        const textTagLine = document.createElement('p');
+        textTagLine.setAttribute("class", "photographers__tag-line");
         textTagLine.textContent = description;
 
-        const textPrice = document.createElement( 'p' );
-        textPrice.setAttribute("class", "photographer__price");
+        const textPrice = document.createElement('p');
+        textPrice.setAttribute("class", "photographers__price");
         textPrice.textContent = pricePerDay;
 
         article.append(divLink, divDescription);
@@ -49,35 +49,42 @@ const photographerFactory = (data) => {
     const getUserDetailsDOM = () => {
         const pictureSrc = '.' + picture;
 
-        const divDetails = document.createElement( 'div' );
+        const divDetails = document.createElement('div');
         divDetails.setAttribute("class", "photographer__details");
 
-        const title = document.createElement( 'h1' );
-        title.setAttribute("class", "h1 photographer__title photographer__title--xlarge");
+        const title = document.createElement('h1');
+        title.setAttribute("class", "h1 photographer__title");
         title.textContent = name;
 
-        const divDescription = document.createElement( 'div' );
+        const divDescription = document.createElement('div');
         divDescription.setAttribute("class", "");
 
-        const textLocation = document.createElement( 'p' );
+        const textLocation = document.createElement('p');
         textLocation.setAttribute("class", "");
         textLocation.textContent = location;
 
-        const textTagLine = document.createElement( 'p' );
+        const textTagLine = document.createElement('p');
         textTagLine.setAttribute("class", "");
         textTagLine.textContent = description;
 
-        divDetails.append(title, divDescription);
-        divDescription.append(textLocation, textTagLine);
+        const divImg = document.createElement('div');
+        divImg.setAttribute("class", "photographer__img-container");
 
-        const img = document.createElement( 'img' );
-        setAttributes(img, {"src" : pictureSrc, "alt" : name, "class" : "photographer__img" });
+        const img = document.createElement('img');
+        setAttributes(img, { "src": pictureSrc, "alt": name, "class": "photographer__img" });
+        
+        const divButton = document.createElement('div');
+        divButton.setAttribute("class", "photographer__button-container");
 
-        const button = document.createElement( 'button' );
+        const button = document.createElement('button');
         button.setAttribute("class", "button");
         button.textContent = "Contactez-moi";
 
-        return ({divDetails, button, img});
+        divDescription.append(textLocation, textTagLine);
+        divDetails.append(title, divDescription);
+        divImg.append(img);
+        divButton.append(button);
+        return ({ divDetails, divButton, divImg });
 
     }
 

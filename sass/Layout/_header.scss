@@ -4,4 +4,14 @@
     justify-content: space-between;
     align-items: center;
     height: 90px;
+    margin: 0 100px;
+
+    &__logo {
+        height: 50px;
+    }
+
+    &__title {
+        color: #901C1C;
+        font-size: 36px;
+    }
 }

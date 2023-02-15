@@ -1,24 +1,39 @@
 import { setAttributes } from '../utils/utils.js';
 
-function mediaFactory(data) {
+const mediaFactory = (data) => {
     const { id, photographerId, title, image, likes, date, price, video } = data;
 
-    const picture = `../assets/images/${photographerId}/${image}`;
-    const videoSrc = `../assets/images/${photographerId}/${video}`;
+    const mediaSrc = `../assets/images/${photographerId}/`;
+    const pictureSrc = mediaSrc + image;
+    const videoSrc = mediaSrc + video;
     const dateOfCreation = `${date}`;
     const priceOfMedia = `${price}€`;
     const likesOfMedia = `${likes}`;
 
 
-    const getMediaDOM = () => {
+    const getMediaDOM = (type) => {
         const article = document.createElement('article');
         article.setAttribute("class", "article media__article");
 
-        const img = document.createElement('img');
-        setAttributes(img, { "src": picture, "alt": title, "class": "media__img" });
+        let media;
+        if (type === "img") {
+            media = document.createElement('img');
+            setAttributes(media, { "src": pictureSrc, "alt": title, "class": "media__img" });
+        }
+        else if (type === "video") {
+            const video = document.createElement('video');
+            const src = document.createElement('source');
+            const videoDownload = document.createElement('a');
+            videoDownload.setAttribute("href", videoSrc);
+            setAttributes(video, { "controls": "", "class": "media__video" });
+            setAttributes(src, { "src": videoSrc, "type": "video/mp4" });
+            video.append(src,'Download the', videoDownload, 'video');
+            media = video;
+        }
 
-        const video = document.createElement('video');
-        setAttributes(video, { "src": videoSrc, "alt": title, "class": "media__video" });
+        const divImg = document.createElement('div');
+        divImg.setAttribute("class", "media__img-container");
+        divImg.append(media);
 
         const divDescription = document.createElement('div');
         divDescription.setAttribute("class", "media__description");
@@ -37,13 +52,13 @@ function mediaFactory(data) {
         const heart = document.createElement('i');
         heart.setAttribute("class", "fas fa-heart media__likes-heart");
 
-        article.append(img, video, divDescription);
+        article.append(divImg, divDescription);
         divDescription.append(textTitle, divLikes);
         divLikes.append(textLikes, heart);
         return (article);
     }
 
-    return { id, photographerId, title, picture, videoSrc, dateOfCreation, priceOfMedia, likesOfMedia, getMediaDOM }
+    return { id, photographerId, title, pictureSrc, videoSrc, dateOfCreation, priceOfMedia, likesOfMedia, getMediaDOM }
 
 }
 

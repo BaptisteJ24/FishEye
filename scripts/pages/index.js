@@ -1,9 +1,7 @@
-import { setAttributes, getAllData, getDataByProperty, getDataById } from '../utils/utils.js';
+import { setAttributes, getCurrentPage, getAllData, getDataByProperty, getDataById } from '../utils/utils.js';
 import { photographerFactory } from '../factories/photographer.js';
 
-const currentPage = document.querySelector('body').dataset.page;
-
-async function getPhotographers() {
+const getPhotographers = async () => {
     //  Requête fetch pour récupérer les données des photographes dans data/photographers.json
     try {
         const photographersArray = await getDataByProperty('../../data/photographers.json', 'photographers');
@@ -14,8 +12,8 @@ async function getPhotographers() {
     };
 };
 
-async function displayData(photographers) {
-    const photographersSection = document.querySelector(".photographer__section");
+const displayData = async (photographers) => {
+    const photographersSection = document.querySelector(".photographers__section");
 
     photographers.forEach((photographer) => {
         const photographerModel = photographerFactory(photographer);
@@ -24,13 +22,13 @@ async function displayData(photographers) {
     });
 };
 
-async function initPhotographers() {
+const initPhotographers = async () => {
     // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
     displayData(photographers);
 };
 
-if (currentPage === 'index') {
+if (getCurrentPage() === 'index') {
     window.addEventListener('load', initPhotographers());
 }
 
