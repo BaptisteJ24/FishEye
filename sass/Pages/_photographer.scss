@@ -59,22 +59,18 @@
         }
     }
 
-    &__description {
-        text-align: center;
-    }
-
     &__location {
-        color: #901C1C;
-        font-size: 13px;
+        color : #901C1C;
+        font-size: 23px;
     }
 
     &__tag-line {
-        font-size: 10px;
+        color: #525252;
+        font-size: 18px;
     }
 
-    &__price {
-        color: #757575;
-        font-size: 9px;
+    &__description {
+        text-align: center;
     }
 
 }

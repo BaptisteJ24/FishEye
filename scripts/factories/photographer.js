@@ -60,11 +60,11 @@ const photographerFactory = (data) => {
         divDescription.setAttribute("class", "");
 
         const textLocation = document.createElement('p');
-        textLocation.setAttribute("class", "");
+        textLocation.setAttribute("class", "photographer__location");
         textLocation.textContent = location;
 
         const textTagLine = document.createElement('p');
-        textTagLine.setAttribute("class", "");
+        textTagLine.setAttribute("class", "photographer__tag-line");
         textTagLine.textContent = description;
 
         const divImg = document.createElement('div');
@@ -77,7 +77,7 @@ const photographerFactory = (data) => {
         divButton.setAttribute("class", "photographer__button-container");
 
         const button = document.createElement('button');
-        button.setAttribute("class", "button");
+        setAttributes(button, {"class": "button", "data-name": "contactButton"});
         button.textContent = "Contactez-moi";
 
         divDescription.append(textLocation, textTagLine);

@@ -21,14 +21,13 @@ const mediaFactory = (data) => {
             setAttributes(media, { "src": pictureSrc, "alt": title, "class": "media__img" });
         }
         else if (type === "video") {
-            const video = document.createElement('video');
+            media = document.createElement('video');
             const src = document.createElement('source');
             const videoDownload = document.createElement('a');
             videoDownload.setAttribute("href", videoSrc);
-            setAttributes(video, { "controls": "", "class": "media__video" });
+            setAttributes(media, { "controls": "", "class": "media__video" });
             setAttributes(src, { "src": videoSrc, "type": "video/mp4" });
-            video.append(src,'Download the', videoDownload, 'video');
-            media = video;
+            media.append(src,'Download the', videoDownload, 'video');
         }
 
         const divImg = document.createElement('div');

@@ -1,10 +1,12 @@
-function displayModal() {
+const displayModal = async () => {
     const modal = document.getElementById("contact_modal");
 	modal.style.display = "block";
 }
 
-function closeModal() {
+const closeModal = async () => {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
 
+
+export { displayModal, closeModal };

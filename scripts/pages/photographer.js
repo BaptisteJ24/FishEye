@@ -1,6 +1,7 @@
-import { setAttributes, getCurrentPage, getAllData, getDataByProperty, getDataById } from '../utils/utils.js';
+import { getCurrentPage, getDataByProperty, getDataById } from '../utils/utils.js';
 import { photographerFactory } from '../factories/photographer.js';
 import { mediaFactory } from '../factories/media.js';
+import { displayModal } from '../utils/contactForm.js';
 
 const getMedia = async () => { // return : object
     try {
@@ -48,18 +49,35 @@ const getMediaById = async () => {
     };
 }
 
-const displayMedia = async (medias) => {
+const displayMedia = async (medias, sortOption) => {
+    switch (sortOption) {
+        case 'popularity':
+            medias.sort((a, b) => b.likes - a.likes);
+            break;
+        case 'date':
+            medias.sort((a, b) => new Date(b.date) - new Date(a.date));
+            break;
+        case 'title':
+            medias.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+        default:
+            medias.sort((a, b) => b.likes - a.likes);
+            break;
+    }
+
     const mediaSection = document.querySelector(".media__section");
+    mediaSection.innerHTML = '';
     medias.forEach((media) => {
         const type = media.image ? 'img' : 'video';
         const mediaModel = mediaFactory(media);
-        const mediaDOM = mediaModel.getMediaDOM(type); // getMediaDOM(img or video)
+        const mediaDOM = mediaModel.getMediaDOM(type);
         mediaSection.append(mediaDOM);
     });
 }
 
 const displayPhotographerDetails = async (photographerDetails) => {
     const photographerSection = document.querySelector(".photographer__section");
+    photographerSection.innerHTML = '';
     photographerDetails.forEach((photographer) => {
         const photographerModel = photographerFactory(photographer);
         const photographerDOM = photographerModel.getUserDetailsDOM();
@@ -69,41 +87,27 @@ const displayPhotographerDetails = async (photographerDetails) => {
     });
 }
 
-const initMedia = async () => {
+const initMedia = async (sortOption) => {
     const { medias } = await getMediaById();
-    displayMedia(medias);
+    displayMedia(medias, sortOption);
 }
 
 const initPhotographerDetails = async () => {
     const photographerDetails = await getPhotographerDetailsById();
     displayPhotographerDetails(photographerDetails);
+    const contactButton = document.querySelector('[data-name="contactButton"]');
+    return contactButton;
+}
+
+const loadPhotographerPage = async (sortOption = "popularity") => {
+    await initMedia(sortOption);
+    const contactButton = await initPhotographerDetails();
+    contactButton.addEventListener('click', displayModal);
 }
 
 // event listener on load photographer page.
-
 if (getCurrentPage() === 'photographer') {
-    window.addEventListener('load', () => { 
-        initMedia(); 
-        initPhotographerDetails();
-    });
+    window.addEventListener('load', loadPhotographerPage);
 }
 
-
-// function focusNextListItem(direction) {
-//   const activeElementId = document.activeElement.id;
-//   if (activeElementId === "dropdown__selected") {
-//     document.querySelector(`#${listItemIds[0]}`).focus();
-//   } 
-//   else {
-//     const currentActiveElementIndex = listItemIds.indexOf(activeElementId);
-//   }
-// }
-
-
-// sort media by Likes, Date or Title
-// document.querySelector('.sort__option--chevron').addEventListener('click', () => {
-//     const listOptions = document.querySelectorAll('.sort__option--border');
-//     listOptions.forEach((option) => {
-//         option.classList.toggle('hide');
-//     })
-// });
+export { loadPhotographerPage }

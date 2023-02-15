@@ -21,24 +21,8 @@
 
     <div class="dropdown">
       <label id="dropdown__label" class="dropdown__label">Trier par : </label>
-
-      <!-- <select class="dropdown__select">
-        <option value="popularite">Popularité</option>
-        <option value="date">Date</option>
-        <option value="titre">Titre</option>
-      </select> -->
-
-      <!-- <div class="dropdown__select">
-        <input type="radio" name="sort" id="popularity" value="popularity" checked>
-        <label for="popularity">Popularité</label>
-        <input type="radio" name="sort" id="date" value="date">
-        <label for="date">Date</label>
-        <input type="radio" name="sort" id="title" value="title">
-        <label for="title">Titre</label>
-      <div> -->
-       
       <div class="dropdown__list-container">
-        <ul class="dropdown__list" role="button" aria-expanded="false">
+        <ul class="dropdown__list" role="button" aria-expanded="false" aria-haspopup="listbox">
           <li role="listbox" aria-labelledby="dropdown__label" id="dropdown__selected" class="dropdown__list-item dropdown__selected" tabindex="0"
             data-value="popularity" data-text="Popularité" aria-label="popularity">
             <span class="dropdown__placeholder dropdown--text-style">Popularité</span>
@@ -57,7 +41,7 @@
       <div class="modal">
         <header class="header">
           <h2 class="h2">Contactez-moi</h2>
-          <img src="../assets/icons/close.svg" alt="close cross" onclick="closeModal()">
+          <img src="../assets/icons/close.svg" alt="close cross">
           <span>
             <div></div>
           </span>

@@ -160,19 +160,16 @@ a {
     font-size: 54px;
   }
 }
-.photographer__description {
-  text-align: center;
-}
 .photographer__location {
   color: #901C1C;
-  font-size: 13px;
+  font-size: 23px;
 }
 .photographer__tag-line {
-  font-size: 10px;
+  color: #525252;
+  font-size: 18px;
 }
-.photographer__price {
-  color: #757575;
-  font-size: 9px;
+.photographer__description {
+  text-align: center;
 }
 
 .dropdown {

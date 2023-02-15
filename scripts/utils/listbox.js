@@ -1,3 +1,5 @@
+import { loadPhotographerPage } from "../pages/photographer.js";
+
 // DOM elements
 const dropdownButton = document.querySelector(".dropdown__list"),
     dropdownChevron = document.querySelector(".dropdown__chevron"),
@@ -46,6 +48,7 @@ listItemsWithBorder.forEach(item => {
         const previousItem = listItemObj[dropdownSelected.dataset.value];
         selectDropdown(e);
         changeItemsInDropdown(e, previousItem);
+        loadPhotographerPage(dropdownSelected.dataset.value);
     });
 });
 
