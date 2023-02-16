@@ -52,12 +52,16 @@ const getDataById = async (url, property = null, id, propertyId = 'id') => { // 
         if (property === null) {
             const data = await getAllData(url);
             const dataById = Object.values(data).map((property) => property.filter((obj) => obj[propertyId] === id)).flat();
-
             return dataById;
         }
 
         const dataByProperty = await getDataByProperty(url, property);
         const dataById = dataByProperty.filter((obj) => obj[propertyId] === JSON.parse(id));
+
+        // si dataById n'a qu'une seule valeur, on retourne l'objet et non un tableau.
+        if (dataById.length === 1) {
+            return dataById[0];
+        }
 
         return dataById;
     }

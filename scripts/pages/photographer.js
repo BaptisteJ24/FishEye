@@ -49,7 +49,50 @@ const getMediaById = async () => {
     };
 }
 
-const displayMedia = async (medias, sortOption) => {
+const displayMedia = async (medias) => {
+    const mediaSection = document.querySelector(".media__section");
+    mediaSection.innerHTML = '';
+    medias.forEach((media) => {
+        const type = media.image ? 'img' : 'video';
+        const mediaModel = mediaFactory(media);
+        const mediaDOM = mediaModel.getMediaDOM(type);
+        mediaSection.append(mediaDOM);
+    });
+}
+
+const displayPhotographerDetails = async (photographerDetails) => {
+    const photographerSection = document.querySelector(".photographer__section");
+    photographerSection.innerHTML = '';
+
+    const photographerModel = photographerFactory(photographerDetails);
+    const photographerDOM = photographerModel.getUserDetailsDOM();
+    Object.values(photographerDOM).forEach((value) => {
+        photographerSection.append(value);
+    });
+
+}
+
+const displayPhotographerTotalLikesAndPrice = async (medias, photographer) => {
+    const photographerAside = document.querySelector(".photographer__aside");
+    const totalLikes = medias.reduce((acc, media) => acc + media.likes, 0);
+    const TotalLikesAndPriceModel = photographerFactory(photographer);
+    console.log(TotalLikesAndPriceModel);
+    const TotalLikesAndPriceDOM = TotalLikesAndPriceModel.getTotalLikesAndPriceDOM(totalLikes);
+    Object.values(TotalLikesAndPriceDOM).forEach((value) => {
+        photographerAside.append(value);
+    });
+}
+
+const initPhotographerTotalLikesAndPrice = async () => {
+    const { medias } = await getMediaById();
+    const photographer = await getPhotographerDetailsById();
+    console.log(photographer);
+    displayPhotographerTotalLikesAndPrice(medias, photographer);
+}
+
+const initMedia = async (sortOption) => {
+    const { medias } = await getMediaById();
+
     switch (sortOption) {
         case 'popularity':
             medias.sort((a, b) => b.likes - a.likes);
@@ -64,32 +107,7 @@ const displayMedia = async (medias, sortOption) => {
             medias.sort((a, b) => b.likes - a.likes);
             break;
     }
-
-    const mediaSection = document.querySelector(".media__section");
-    mediaSection.innerHTML = '';
-    medias.forEach((media) => {
-        const type = media.image ? 'img' : 'video';
-        const mediaModel = mediaFactory(media);
-        const mediaDOM = mediaModel.getMediaDOM(type);
-        mediaSection.append(mediaDOM);
-    });
-}
-
-const displayPhotographerDetails = async (photographerDetails) => {
-    const photographerSection = document.querySelector(".photographer__section");
-    photographerSection.innerHTML = '';
-    photographerDetails.forEach((photographer) => {
-        const photographerModel = photographerFactory(photographer);
-        const photographerDOM = photographerModel.getUserDetailsDOM();
-        Object.values(photographerDOM).forEach((value) => {
-            photographerSection.append(value);
-        });
-    });
-}
-
-const initMedia = async (sortOption) => {
-    const { medias } = await getMediaById();
-    displayMedia(medias, sortOption);
+    displayMedia(medias);
 }
 
 const initPhotographerDetails = async () => {
@@ -107,7 +125,10 @@ const loadPhotographerPage = async (sortOption = "popularity") => {
 
 // event listener on load photographer page.
 if (getCurrentPage() === 'photographer') {
-    window.addEventListener('load', loadPhotographerPage);
+    window.addEventListener('load', () => {
+        loadPhotographerPage();
+        initPhotographerTotalLikesAndPrice();
+    });
 }
 
 export { loadPhotographerPage }

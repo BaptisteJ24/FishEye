@@ -6,12 +6,11 @@ const photographerFactory = (data) => {
     const picture = `./assets/photographers/${portrait}`;
     const location = `${city}, ${country}`;
     const description = `${tagline}`;
-    const pricePerDay = `${price}€/jour`;
+    const pricePerDay = `${price}€ / jour`;
 
     const getUserCardDOM = () => {
         const article = document.createElement('article');
         article.setAttribute("class", "article photographers__article");
-
         const divLink = document.createElement('div');
         divLink.setAttribute("class", "photographers__link");
         divLink.addEventListener("click", () => {
@@ -84,12 +83,32 @@ const photographerFactory = (data) => {
         divDetails.append(title, divDescription);
         divImg.append(img);
         divButton.append(button);
+
         return ({ divDetails, divButton, divImg });
 
     }
 
+    const getTotalLikesAndPriceDOM = (totalLikes) => {
+        const divTotalLikes = document.createElement('div');
+        divTotalLikes.setAttribute("class", "photographer__aside__total-likes-container");
 
-    return { name, picture, id, location, description, pricePerDay, getUserCardDOM, getUserDetailsDOM }
+        const textTotalLikes = document.createElement('p');
+        textTotalLikes.setAttribute("class", "photographer__aside__total-likes-text");
+        textTotalLikes.textContent = totalLikes;
+
+        const heart = document.createElement('span');
+        heart.setAttribute("class", "fas fa-heart photographer__aside__total-likes-heart");
+
+        divTotalLikes.append(textTotalLikes, heart);
+        
+        const textPrice = document.createElement('p');
+        textPrice.setAttribute("class", "photographer__aside__price");
+        textPrice.textContent = pricePerDay;
+
+        return ({ divTotalLikes, textPrice });
+    }
+
+    return { name, picture, id, location, description, pricePerDay, getUserCardDOM, getUserDetailsDOM, getTotalLikesAndPriceDOM };
 }
 
 

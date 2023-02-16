@@ -73,6 +73,47 @@
         text-align: center;
     }
 
+    &__aside{
+        position: fixed;
+        bottom: 0;
+        right: 35px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 30px;
+        background-color: #DB8876;
+        border-radius: 5px;
+        min-width: 320px;
+
+        &__total-likes {
+            &-container {
+                display: flex;
+                align-items: center;
+                min-width: 70px;
+            }
+            &-text {
+                margin-right: 5px;
+                font-size: 24px;
+                font-weight: 500;
+            }
+            &-heart {
+                font-size: 24px;
+            }
+        }
+
+        &__price {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+    }
+
+
+
+
+
+
 }
 
 .dropdown {

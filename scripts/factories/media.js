@@ -6,9 +6,6 @@ const mediaFactory = (data) => {
     const mediaSrc = `../assets/images/${photographerId}/`;
     const pictureSrc = mediaSrc + image;
     const videoSrc = mediaSrc + video;
-    const dateOfCreation = `${date}`;
-    const priceOfMedia = `${price}€`;
-    const likesOfMedia = `${likes}`;
 
 
     const getMediaDOM = (type) => {
@@ -46,7 +43,7 @@ const mediaFactory = (data) => {
 
         const textLikes = document.createElement('p');
         textLikes.setAttribute("class", "media__likes-number");
-        textLikes.textContent = likesOfMedia;
+        textLikes.textContent = likes;
 
         const heart = document.createElement('i');
         heart.setAttribute("class", "fas fa-heart media__likes-heart");
@@ -57,7 +54,7 @@ const mediaFactory = (data) => {
         return (article);
     }
 
-    return { id, photographerId, title, pictureSrc, videoSrc, dateOfCreation, priceOfMedia, likesOfMedia, getMediaDOM }
+    return { id, photographerId, title, pictureSrc, videoSrc, date, price, likes, getMediaDOM }
 
 }
 

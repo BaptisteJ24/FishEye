@@ -171,6 +171,36 @@ a {
 .photographer__description {
   text-align: center;
 }
+.photographer__aside {
+  position: fixed;
+  bottom: 0;
+  right: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: #DB8876;
+  border-radius: 5px;
+  min-width: 320px;
+}
+.photographer__aside__total-likes-container {
+  display: flex;
+  align-items: center;
+  min-width: 70px;
+}
+.photographer__aside__total-likes-text {
+  margin-right: 5px;
+  font-size: 24px;
+  font-weight: 500;
+}
+.photographer__aside__total-likes-heart {
+  font-size: 24px;
+}
+.photographer__aside__price {
+  font-size: 24px;
+  font-weight: 500;
+}
 
 .dropdown {
   display: flex;
