@@ -1,18 +1,15 @@
 import { setAttributes } from '../../utils/utils.js';
 
 const mediaFactory = (data) => {
-    const { id, photographerId, title, image, likes, date, price, video } = data;
 
+    const { id, photographerId, title, image, likes, date, price, video } = data;
     const mediaSrc = `../assets/images/${photographerId}/`;
     const pictureSrc = mediaSrc + image;
     const videoSrc = mediaSrc + video;
 
-
     const getMediaDOM = (type) => {
         const article = document.createElement('article');
         article.setAttribute("class", "article media__article");
-
-
 
         let media;
         if (type === "img") {
@@ -29,7 +26,7 @@ const mediaFactory = (data) => {
             setAttributes(src, { "src": videoSrc, "type": "video/mp4" });
             media.append(src, 'Download the', videoDownload, 'video');
         }
-        
+
         const link = document.createElement('a');
         link.setAttribute("href", "#");
         link.setAttribute("class", "media__link");
@@ -94,7 +91,7 @@ const mediaFactory = (data) => {
         textTitle.setAttribute("class", "lightbox__title");
         textTitle.textContent = title;
 
-        return {media : media, textTitle : textTitle};
+        return { media: media, textTitle: textTitle };
     }
 
     return { id, photographerId, title, pictureSrc, videoSrc, date, price, likes, getMediaDOM, getMediaLightboxDOM }

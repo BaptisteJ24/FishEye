@@ -63,6 +63,9 @@ const getDataById = async (url, property = null, id, propertyId = 'id') => { // 
         if (dataById.length === 1) {
             return dataById[0];
         }
+        else if (dataById.length === 0) {
+            throw new Error('Aucune donnée trouvée avec l\'id : ' + id);
+        }
 
         return dataById;
     }

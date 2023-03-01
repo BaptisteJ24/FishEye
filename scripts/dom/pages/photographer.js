@@ -1,7 +1,6 @@
 import { getDataByProperty, getDataById } from '../../utils/utils.js';
 import { photographerFactory } from '../factories/photographer.js';
 import { mediaFactory } from '../factories/media.js';
-import { indexOf } from 'lodash';
 
 let mediasArray = [];
 let index = 0;
