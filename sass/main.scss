@@ -6,12 +6,16 @@
 @import "./Base/reset";
 @import "./Base/typography";
 
+@import "./Components/likeIcon";
 @import "./Components/buttons";
 @import "./Components/cards";
+@import "./Components/dropdown";
+@import "./Components/lightbox";
 
 @import "./Layout/header";
 @import "./Layout/page";
 @import "./Layout/footer";
+@import "./Layout/loader";
 
 @import "./Pages/index";
 @import "./Pages/photographer";
@@ -20,3 +24,14 @@
 .hide {
     display: none;
 }
+
+.visually-hidden {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+  }
+  

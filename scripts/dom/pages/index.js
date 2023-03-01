@@ -1,4 +1,4 @@
-import { setAttributes, getCurrentPage, getAllData, getDataByProperty, getDataById } from '../utils/utils.js';
+import { hideLoader, getCurrentPage, getDataByProperty } from '../../utils/utils.js';
 import { photographerFactory } from '../factories/photographer.js';
 
 const getPhotographers = async () => {
@@ -28,7 +28,7 @@ const initPhotographers = async () => {
     displayData(photographers);
 };
 
-if (getCurrentPage() === 'index') {
-    window.addEventListener('load', initPhotographers());
-}
+
+export { initPhotographers };
+
 

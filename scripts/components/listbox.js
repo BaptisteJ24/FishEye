@@ -1,5 +1,6 @@
-import { getCurrentPage } from "./utils.js";
-import { loadPhotographerPage } from "../pages/photographer.js";
+import { getCurrentPage } from "../utils/utils.js";
+import * as photographerPage from "../dom/pages/photographer.js";
+import { loadEvents } from "../main.js";
 
 if (getCurrentPage() === "photographer") {
 
@@ -47,11 +48,13 @@ if (getCurrentPage() === "photographer") {
 
     // event listener onclick in dropdown list items
     listItemsWithBorder.forEach(item => {
-        item.addEventListener("click", e => {
+        item.addEventListener("click", async e => {
             const previousItem = listItemObj[dropdownSelected.dataset.value];
             selectDropdown(e);
             changeItemsInDropdown(e, previousItem);
-            loadPhotographerPage(dropdownSelected.dataset.value);
+            await photographerPage.initMedia(dropdownSelected.dataset.value);
+            await photographerPage.initPhotographerTotalLikesAndPrice();
+            loadEvents();
         });
     });
 }

@@ -14,6 +14,7 @@ const setAttributes = (el, attrs) => {
     }
 }
 
+
 /**
  * description : get the current page with the data-page attribute of the body.
  * @returns {string} - current page name.

@@ -1,4 +1,4 @@
-import { setAttributes } from '../utils/utils.js';
+import { setAttributes } from '../../utils/utils.js';
 
 const photographerFactory = (data) => {
     const { name, portrait, id, city, country, price, tagline } = data;
@@ -76,7 +76,7 @@ const photographerFactory = (data) => {
         divButton.setAttribute("class", "photographer__button-container");
 
         const button = document.createElement('button');
-        setAttributes(button, {"class": "button", "data-name": "contactButton"});
+        setAttributes(button, {"class": "button js-modal", "data-name": "contactButton", "data-modal": "contact_modal" });
         button.textContent = "Contactez-moi";
 
         divDescription.append(textLocation, textTagLine);

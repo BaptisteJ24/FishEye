@@ -1,7 +1,10 @@
-import { getCurrentPage, getDataByProperty, getDataById } from '../utils/utils.js';
+import { getDataByProperty, getDataById } from '../../utils/utils.js';
 import { photographerFactory } from '../factories/photographer.js';
 import { mediaFactory } from '../factories/media.js';
-import { displayModal } from '../utils/contactForm.js';
+import { indexOf } from 'lodash';
+
+let mediasArray = [];
+let index = 0;
 
 const getMedia = async () => { // return : object
     try {
@@ -35,7 +38,6 @@ const getPhotographerDetailsById = async () => { // return : object
         console.error('Erreur lors de la récupération des données : ', error);
     }
 }
-
 
 const getMediaById = async () => {
     try {
@@ -74,9 +76,9 @@ const displayPhotographerDetails = async (photographerDetails) => {
 
 const displayPhotographerTotalLikesAndPrice = async (medias, photographer) => {
     const photographerAside = document.querySelector(".photographer__aside");
+    photographerAside.innerHTML = '';
     const totalLikes = medias.reduce((acc, media) => acc + media.likes, 0);
     const TotalLikesAndPriceModel = photographerFactory(photographer);
-    console.log(TotalLikesAndPriceModel);
     const TotalLikesAndPriceDOM = TotalLikesAndPriceModel.getTotalLikesAndPriceDOM(totalLikes);
     Object.values(TotalLikesAndPriceDOM).forEach((value) => {
         photographerAside.append(value);
@@ -86,11 +88,10 @@ const displayPhotographerTotalLikesAndPrice = async (medias, photographer) => {
 const initPhotographerTotalLikesAndPrice = async () => {
     const { medias } = await getMediaById();
     const photographer = await getPhotographerDetailsById();
-    console.log(photographer);
     displayPhotographerTotalLikesAndPrice(medias, photographer);
 }
 
-const initMedia = async (sortOption) => {
+const initMedia = async (sortOption = "popularity") => {
     const { medias } = await getMediaById();
 
     switch (sortOption) {
@@ -107,28 +108,55 @@ const initMedia = async (sortOption) => {
             medias.sort((a, b) => b.likes - a.likes);
             break;
     }
+
     displayMedia(medias);
+
+    mediasArray = medias;
+    console.log(mediasArray);
 }
 
 const initPhotographerDetails = async () => {
     const photographerDetails = await getPhotographerDetailsById();
     displayPhotographerDetails(photographerDetails);
-    const contactButton = document.querySelector('[data-name="contactButton"]');
-    return contactButton;
+    const modalHeaderName = document.querySelector('.modal__header__name');
+    modalHeaderName.textContent = photographerDetails.name;
 }
 
-const loadPhotographerPage = async (sortOption = "popularity") => {
-    await initMedia(sortOption);
-    const contactButton = await initPhotographerDetails();
-    contactButton.addEventListener('click', displayModal);
+const displayMediaLightbox = async (indexLightbox) => {
+    const lightbox = document.querySelector('.lightbox__media-title');
+    lightbox.innerHTML = '';
+    index = indexLightbox;
+    console.log('index display:', index);
+    const media = mediasArray[index];
+    const type = media.image ? 'img' : 'video';
+    const mediaModel = mediaFactory(media);
+    const mediaDOM = mediaModel.getMediaLightboxDOM(type);
+    lightbox.append(...Object.values(mediaDOM));
 }
 
-// event listener on load photographer page.
-if (getCurrentPage() === 'photographer') {
-    window.addEventListener('load', () => {
-        loadPhotographerPage();
-        initPhotographerTotalLikesAndPrice();
-    });
+const initMediaLightbox = async (event) => {
+    event.preventDefault();
+    let indexLightbox = mediasArray.findIndex(obj => obj.id === parseInt(event.target.dataset.id));
+    index = indexLightbox;
+    console.log('index :', index);
+    displayMediaLightbox(indexLightbox);
 }
 
-export { loadPhotographerPage }
+const nextMediaInLightbox = async () => {
+    let nextIndex = index + 1;
+    if (nextIndex >= mediasArray.length) {
+        nextIndex = 0;
+    }
+    displayMediaLightbox(nextIndex);
+}
+
+const previousMediaInLightbox = async () => {
+    let previousIndex = index - 1;
+    if (previousIndex < 0) {
+        previousIndex = mediasArray.length - 1;
+    }
+    displayMediaLightbox(previousIndex);
+}
+
+export { initMedia, initPhotographerDetails, initPhotographerTotalLikesAndPrice, initMediaLightbox, nextMediaInLightbox, previousMediaInLightbox };
+

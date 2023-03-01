@@ -1,0 +1,61 @@
+.heart {
+    position: relative;
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+
+    * {
+        pointer-events: none;
+    }
+
+    &__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        &--empty {
+            font-size: 24px;
+            z-index: 1;
+            opacity: 1;
+            color: #901C1C;
+        }
+
+        &--hide {
+            color: #901C1C;
+            font-size: 24px;
+
+            &-container {
+                max-height: 0;
+                transition: max-height 600ms linear;
+                overflow: hidden;
+                z-index: 2;
+            }
+        }
+    }
+
+    &.active {
+        .heart__icon--hide {
+            animation: progress-heart 600ms both ease-in-out;
+        }
+
+        .heart__icon--hide-container {
+            max-height: 24px;
+        }
+
+        .heart__icon--empty {
+            opacity: 0;
+            transition: opacity 0ms 600ms linear;
+        }
+    }
+
+    &:not(.active) {
+        .heart__icon--hide {
+            animation: reverse-progress-heart 600ms both;
+        }
+    }
+
+}

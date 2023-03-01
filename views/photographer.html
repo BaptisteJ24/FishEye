@@ -11,6 +11,14 @@
 </head>
 
 <body data-page="photographer">
+  <div class="loader-container">
+    <div class="loader">
+      <p class="loader__text">Chargement des médias...</p>
+      <div class="loader__icon">
+      </div>
+    </div>
+  </div>
+
   <header role="banner" class="header">
     <a href="../index.html"><img src="../assets/images/logo.png" class="header__logo" alt="FishEye Homepage"></a>
   </header>
@@ -23,15 +31,16 @@
       <label id="dropdown__label" class="dropdown__label">Trier par : </label>
       <div class="dropdown__list-container">
         <ul class="dropdown__list" role="button" aria-expanded="false" aria-haspopup="listbox">
-          <li role="listbox" aria-labelledby="dropdown__label" id="dropdown__selected" class="dropdown__list-item dropdown__selected" tabindex="0"
-            data-value="popularity" data-text="Popularité" aria-label="popularity">
+          <li role="listbox" aria-labelledby="dropdown__label" id="dropdown__selected"
+            class="dropdown__list-item dropdown__selected" tabindex="0" data-value="popularity" data-text="Popularité"
+            aria-label="popularity">
             <span class="dropdown__placeholder dropdown--text-style">Popularité</span>
             <span class="fa-solid fa-chevron-down dropdown__chevron dropdown--text-style"></span>
           </li>
-          <li class="dropdown__list-item dropdown__list-item--border-top dropdown--text-style hide" tabindex="0" aria-label="date" data-value="date"
-            data-text="Date"> Date </li>
-          <li class="dropdown__list-item dropdown__list-item--border-top dropdown--text-style hide" tabindex="0" aria-label="title" data-value="title"
-            data-text="Titre"> Titre </li>
+          <li class="dropdown__list-item dropdown__list-item--border-top dropdown--text-style hide" tabindex="0"
+            aria-label="date" data-value="date" data-text="Date"> Date </li>
+          <li class="dropdown__list-item dropdown__list-item--border-top dropdown--text-style hide" tabindex="0"
+            aria-label="title" data-value="title" data-text="Titre"> Titre </li>
         </ul>
       </div>
     </div>
@@ -40,27 +49,54 @@
 
     </section>
 
-    <div id="contact_modal">
+    <div id="media_lightbox" class="media_lightbox hide">
+      <aside class="lightbox" role="dialog" aria-label="image closeup view" aria-modal="false" aria-hidden="true">
+        <div class="lightbox__content">
+          <button class="fas fa-chevron-left js-lightbox-previous lightbox__chevron" aria-label="previous media">
+          </button>
+          <div class="lightbox__media-title"></div>
+          <button class="fas fa-chevron-right js-lightbox-next lightbox__chevron" aria-label="Next media">
+          </button>
+          <button class="fas fa-close js-lightbox-close lightbox__close" aria-label="close dialog"></button>
+        </div>
+      </aside>
+    </div>
+      
+    <div id="contact_modal" class="contact_modal hide">
       <div class="modal">
         <header class="header">
-          <h2 class="h2">Contactez-moi</h2>
-          <img src="../assets/icons/close.svg" alt="close cross">
-          <span>
-            <div></div>
-          </span>
-        </header>
-        <form class="photographer-form">
-          <div>
-            <label>Prénom</label>
-
+          <div class="modal__title-cross-container">
+            <h2 class="h2">Contactez-moi</h2>
+            <img src="../assets/icons/close.svg" alt="close cross button" class="js-modal-close js-form-reset" data-form="contact__form">
           </div>
-          <button class="contact_button">Envoyer</button>
+          <p class="modal__header__name"></p>
+        </header>
+        <form class="modal__form" id="contact__form">
+          <ul>
+            <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
+              <label id="firstname">Prénom *</label>
+              <input type="text" name="firstname" aria-label="firstname">
+            </li>
+            <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
+              <label id="lastname">Nom *</label>
+              <input type="text" name="lastname" aria-label="lastname">
+            </li>
+            <li class="formData" data-error-message="Veuillez entrer une adresse mail valide.">
+              <label id="email">Email *</label>
+              <input type="email" name="email" aria-label="email">
+            </li>
+            <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
+              <label id="message">Votre message *</label>
+              <textarea name="message" aria-label="message"></textarea>
+            </li>
+          </ul>
+          <button class="button js-form-submit" type="submit" data-form="contact__form">Envoyer</button>
         </form>
       </div>
     </div>
-    
+
     <aside class="photographer__aside">
-      
+
     </aside>
 
 
