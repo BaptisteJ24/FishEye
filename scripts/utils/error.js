@@ -1,5 +1,10 @@
 import { setAttributes } from './utils.js';
 
+let rootUrl = window.location.origin;
+
+console.log(rootUrl);
+
+
     const errorDOM = () => {
         const divError = document.createElement('div');
         divError.setAttribute("class", "error-page");
@@ -7,12 +12,8 @@ import { setAttributes } from './utils.js';
         p.setAttribute("class", "error-page__text");
         p.textContent = 'L\'information que vous recherchez n\'est pas disponible.';
         const a = document.createElement('a');
-        if (window.location.hostname == 'github.com') {
-            setAttributes(a, { "href": "/Projet_6_FishEye", "class": "error-page__link" });
-        }
-        else {
-            setAttributes(a, { "href": "/", "class": "error-page__link" });
-        }
+        rootUrl.includes("github.io") ? rootUrl += "/" + window.location.pathname.split('/')[1] : rootUrl += "/";
+        setAttributes(a, { "href": rootUrl, "class": "error-page__link" });
         a.textContent = 'Retour à l\'accueil';
         divError.append(p, a);
         return ('divError', divError);
