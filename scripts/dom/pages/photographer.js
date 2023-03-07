@@ -7,7 +7,7 @@ let index = 0;
 
 const getMedia = async () => { // return : object
     try {
-        const mediaArray = await getDataByProperty('../../data/photographers.json', 'media');
+        const mediaArray = await getDataByProperty('../data/photographers.json', 'media');
         return ({ media: mediaArray })
 
     }
@@ -30,7 +30,7 @@ const getPhotographerId = async () => { // return : number (id)
 const getPhotographerDetailsById = async () => { // return : object
     try {
         const photographerId = await getPhotographerId();
-        const photographerDetails = await getDataById('../../data/photographers.json', 'photographers', photographerId);
+        const photographerDetails = await getDataById('../data/photographers.json', 'photographers', photographerId);
         if (photographerDetails === undefined) {
             throw new Error('Photographe introuvable');
         }
