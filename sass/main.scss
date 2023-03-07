@@ -8,7 +8,6 @@
 
 @import "./Components/likeIcon";
 @import "./Components/buttons";
-@import "./Components/cards";
 @import "./Components/dropdown";
 @import "./Components/lightbox";
 
@@ -27,11 +26,12 @@
 
 .visually-hidden {
     position: absolute;
-    clip: rect(1px, 1px, 1px, 1px);
-    padding: 0;
-    border: 0;
-    height: 1px;
     width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
     overflow: hidden;
-  }
-  
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

@@ -23,12 +23,40 @@ if (getCurrentPage() === "photographer") {
 
     // function to toggle dropdown list visibility
     const toggleListVisibility = () => {
+
         listItemsWithBorder.forEach(item => item.classList.toggle("hide"));
         dropdownChevron.classList.toggle("dropdown__expanded");
-        dropdownButton.setAttribute("aria-expanded", dropdownChevron.classList.contains("expanded"));
+        dropdownButton.setAttribute("aria-expanded", dropdownChevron.classList.contains("dropdown__expanded"));
+        if (dropdownChevron.classList.contains("dropdown__expanded")) {
+            dropdownButton.setAttribute("aria-label", "Close sort list");
+            // Vérify if the new element on which the focus is made is in the dropdown list or not
+
+            dropdownButton.addEventListener("focusout", focusOutDropdown);
+        }
+        else {
+            dropdownButton.setAttribute("aria-label", "Open sort list");
+        }
+    };
+
+    const focusOutDropdown = (e) => {
+        const isInDropdown = listItems.some((item) => item.contains(e.relatedTarget));
+        // If the new element is not in the dropdown list, hide the list and reset the button
+        if (!isInDropdown) {
+            toggleListVisibility();
+            dropdownButton.removeEventListener("focusout", focusOutDropdown);
+        }
     }
+
     // event listener onclick in dropdown
-    dropdownButton.addEventListener("click", toggleListVisibility);
+    function handleDropdownEvent(e) {
+        if (e.type === "click" || (e.type === "keydown" && (e.key === "Enter" || e.key === " "))) {
+            dropdownButton.removeEventListener("focusout", focusOutDropdown);
+            toggleListVisibility();
+        }
+    }
+    dropdownButton.addEventListener("click", handleDropdownEvent);
+    dropdownButton.addEventListener("keydown", handleDropdownEvent);
+
 
     // function to select dropdown item
     const selectDropdown = (e) => {
@@ -55,6 +83,17 @@ if (getCurrentPage() === "photographer") {
             await photographerPage.initMedia(dropdownSelected.dataset.value);
             await photographerPage.initPhotographerTotalLikesAndPrice();
             loadEvents();
+        });
+
+        item.addEventListener("keydown", async e => {
+            if (e.key === "Enter" || e.key === "Space") {
+                const previousItem = listItemObj[dropdownSelected.dataset.value];
+                selectDropdown(e);
+                changeItemsInDropdown(e, previousItem);
+                await photographerPage.initMedia(dropdownSelected.dataset.value);
+                await photographerPage.initPhotographerTotalLikesAndPrice();
+                loadEvents();
+            }
         });
     });
 }

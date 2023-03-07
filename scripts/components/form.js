@@ -8,7 +8,6 @@ const validData = (formElements, data) => {
     let i = 0;
     Object.values(data).forEach((el) => {
         if (regex[el.type].test(el.value)) {
-            console.log("ok");
             formElements[i].parentNode.toggleAttribute('data-error-visible', false);
             formElements[i].parentNode.classList.toggle('valid', true);
             valid = true;
@@ -23,13 +22,9 @@ const validData = (formElements, data) => {
     return valid;
 }
 
-
 const validForm = (e) => {
     e.preventDefault();
     const form = document.getElementById(e.target.getAttribute('data-form'));
-    console.log("form", form);
-    console.log("form.elements", form.elements);
-
     const data = Object.values(form.elements).reduce((acc, el) => {
         switch (el.nodeName) {
             case "INPUT":
@@ -60,7 +55,7 @@ const validForm = (e) => {
 
 const resetForm = (e) => {
     const form = document.getElementById(e.target.getAttribute('data-form'));
-    const formElements = document.querySelectorAll('.formData');
+    const formElements = form.querySelectorAll('.formData');
     formElements.forEach((el) => {
         el.toggleAttribute('data-error-visible', false);
         el.classList.toggle('valid', false);
@@ -71,7 +66,7 @@ const resetForm = (e) => {
 const checkFormData = (e) => {
     const formDataElement = e.target;
     const formData = formDataElement.parentNode;
-    let formDataType;
+    let formDataType = "";
 
     switch (formDataElement.nodeName) {
         case "INPUT":
@@ -83,8 +78,7 @@ const checkFormData = (e) => {
             break;
     }
 
-    if (regex[formDataElement.type].test(formDataElement.value)) {
-        console.log("je passe ici");
+    if (regex[formDataType].test(formDataElement.value)) {
         formData.toggleAttribute('data-error-visible', false);
         formData.classList.toggle('valid', true);
     }
@@ -93,6 +87,5 @@ const checkFormData = (e) => {
         formData.setAttribute('data-error-visible', 'true');
     }
 }
-
 
 export { validForm, resetForm, checkFormData };

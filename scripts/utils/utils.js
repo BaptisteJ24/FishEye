@@ -1,3 +1,5 @@
+import { errorDOM } from './error.js';
+
 /**
  * description : set attributes to an element.
  * @param {HTMLElement} el - element to set attributes.
@@ -70,6 +72,10 @@ const getDataById = async (url, property = null, id, propertyId = 'id') => { // 
         return dataById;
     }
     catch (error) {
+        document.querySelector('.loader-container').innerHTML = '';
+        document.querySelector('.loader-container').style.display = 'none';
+        document.querySelector('main').innerHTML = '';
+        document.querySelector('main').append(errorDOM());
         console.error(`Erreur lors de la récupération des données : ${error}`);
     }
 }

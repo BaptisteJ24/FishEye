@@ -58,7 +58,7 @@
     height: 0px;
   }
   50% {
-    height: 600px;
+    height: 400px;
   }
 }
 @keyframes loader-scan-line {
@@ -66,7 +66,7 @@
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(600px);
+    transform: translateY(400px);
   }
 }
 * {
@@ -95,9 +95,9 @@ a {
 
 .heart {
   position: relative;
-  width: 24px;
-  min-width: 24px;
-  height: 24px;
+  width: 25px;
+  min-width: 25px;
+  height: 25px;
   overflow: hidden;
   border: 0;
   background: transparent;
@@ -107,9 +107,8 @@ a {
 }
 .heart__icon {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
 }
 .heart__icon--empty {
   font-size: 24px;
@@ -281,6 +280,32 @@ a {
 .header__title {
   color: #901C1C;
   font-size: 36px;
+}
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
+.error-page__text {
+  font-size: 24px;
+  font-weight: 500;
+  color: #901C1C;
+  margin: 0 0 20px 0;
+}
+.error-page__link {
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: #901C1C;
+  background-color: #901C1C;
 }
 
 .loader {
@@ -505,23 +530,6 @@ a {
   width: 31%;
   margin: 0 1% 50px;
 }
-.media__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  overflow-clip-margin: unset;
-}
-.media__img-container {
-  width: 100%;
-  aspect-ratio: 7/6;
-  overflow: hidden;
-  border-radius: 5px;
-}
-.media__video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 .media__description {
   display: flex;
   flex-direction: row;
@@ -554,10 +562,27 @@ a {
   color: #901C1C;
 }
 .media__link {
+  display: block;
+  height: 100%;
   cursor: pointer;
 }
-
-.media_lightbox {
+.media__link:focus-visible {
+  outline: 3px solid #901C1C;
+  outline-offset: -3px;
+}
+.media__link-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow-clip-margin: unset;
+}
+.media__link-media-container {
+  width: 100%;
+  aspect-ratio: 7/6;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.media__lightbox {
   display: block;
   position: fixed;
   z-index: 10;
@@ -632,7 +657,8 @@ a {
   list-style: none;
   width: 100%;
 }
-.contact_modal .modal__form .formData.valid input, .contact_modal .modal__form .formData.valid textarea {
+.contact_modal .modal__form .formData.valid input,
+.contact_modal .modal__form .formData.valid textarea {
   border: 2px solid green;
 }
 .contact_modal .modal__form .formData[data-error-visible=true]::after {
@@ -643,14 +669,16 @@ a {
   width: 100%;
   text-align: right;
 }
-.contact_modal .modal__form .formData[data-error-visible=true] input, .contact_modal .modal__form .formData[data-error-visible=true] textarea {
+.contact_modal .modal__form .formData[data-error-visible=true] input,
+.contact_modal .modal__form .formData[data-error-visible=true] textarea {
   border: 2px solid red;
 }
 .contact_modal .modal__form label {
   color: #312E2E;
   font-size: 32px;
 }
-.contact_modal .modal__form input, .contact_modal .modal__form textarea {
+.contact_modal .modal__form input,
+.contact_modal .modal__form textarea {
   width: 100%;
   height: 50px;
   border: none;
@@ -668,12 +696,14 @@ a {
 
 .visually-hidden {
   position: absolute;
-  clip: rect(1px, 1px, 1px, 1px);
-  padding: 0;
-  border: 0;
-  height: 1px;
   width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

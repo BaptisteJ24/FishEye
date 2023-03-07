@@ -14,8 +14,7 @@
   <div class="loader-container">
     <div class="loader">
       <p class="loader__text">Chargement des médias...</p>
-      <div class="loader__icon">
-      </div>
+      <div class="loader__icon"></div>
     </div>
   </div>
 
@@ -30,7 +29,7 @@
     <div class="dropdown">
       <label id="dropdown__label" class="dropdown__label">Trier par : </label>
       <div class="dropdown__list-container">
-        <ul class="dropdown__list" role="button" aria-expanded="false" aria-haspopup="listbox">
+        <ul class="dropdown__list" role="button" aria-expanded="false" aria-haspopup="listbox" aria-label="Open sort list">
           <li role="listbox" aria-labelledby="dropdown__label" id="dropdown__selected"
             class="dropdown__list-item dropdown__selected" tabindex="0" data-value="popularity" data-text="Popularité"
             aria-label="popularity">
@@ -49,7 +48,7 @@
 
     </section>
 
-    <div id="media_lightbox" class="media_lightbox hide">
+    <div id="media__lightbox" class="media__lightbox hide">
       <aside class="lightbox" role="dialog" aria-label="image closeup view" aria-modal="false" aria-hidden="true">
         <div class="lightbox__content">
           <button class="fas fa-chevron-left js-lightbox-previous lightbox__chevron" aria-label="previous media">
@@ -57,13 +56,13 @@
           <div class="lightbox__media-title"></div>
           <button class="fas fa-chevron-right js-lightbox-next lightbox__chevron" aria-label="Next media">
           </button>
-          <button class="fas fa-close js-lightbox-close lightbox__close" aria-label="close dialog"></button>
+          <button class="fas fa-close js-modal-close js-lightbox-close lightbox__close" aria-label="close dialog" data-modal="media_lightbox"></button>
         </div>
       </aside>
     </div>
       
     <div id="contact_modal" class="contact_modal hide">
-      <div class="modal">
+      <div class="modal" role="dialog">
         <header class="header">
           <div class="modal__title-cross-container">
             <h2 class="h2">Contactez-moi</h2>
@@ -71,23 +70,23 @@
           </div>
           <p class="modal__header__name"></p>
         </header>
-        <form class="modal__form" id="contact__form">
+        <form class="modal__form" id="contact__form" role="form" aria-label="Contact Form">
           <ul>
             <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
-              <label id="firstname">Prénom *</label>
-              <input type="text" name="firstname" aria-label="firstname">
+              <label for="firstname">Prénom *</label>
+              <input id="firstname" type="text" name="firstname" aria-label="firstname" placeholder="Toto">
             </li>
             <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
-              <label id="lastname">Nom *</label>
-              <input type="text" name="lastname" aria-label="lastname">
+              <label for="lastname">Nom *</label>
+              <input id="lastname" type="text" name="lastname" aria-label="lastname" placeholder="Dupont">
             </li>
             <li class="formData" data-error-message="Veuillez entrer une adresse mail valide.">
-              <label id="email">Email *</label>
-              <input type="email" name="email" aria-label="email">
+              <label for="email">Email *</label>
+              <input id="email" type="email" name="email" aria-label="email" placeholder="toto.dupont@gmail.com">
             </li>
             <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
-              <label id="message">Votre message *</label>
-              <textarea name="message" aria-label="message"></textarea>
+              <label for="message">Votre message *</label>
+              <textarea id="message" name="message" aria-label="message" placeholder="Votre message..."></textarea>
             </li>
           </ul>
           <button class="button js-form-submit" type="submit" data-form="contact__form">Envoyer</button>

@@ -31,6 +31,9 @@ const getPhotographerDetailsById = async () => { // return : object
     try {
         const photographerId = await getPhotographerId();
         const photographerDetails = await getDataById('../../data/photographers.json', 'photographers', photographerId);
+        if (photographerDetails === undefined) {
+            throw new Error('Photographe introuvable');
+        }
         return photographerDetails;
     }
     catch (error) {
@@ -109,9 +112,7 @@ const initMedia = async (sortOption = "popularity") => {
     }
 
     displayMedia(medias);
-
     mediasArray = medias;
-    console.log(mediasArray);
 }
 
 const initPhotographerDetails = async () => {
@@ -125,7 +126,6 @@ const displayMediaLightbox = async (indexLightbox) => {
     const lightbox = document.querySelector('.lightbox__media-title');
     lightbox.innerHTML = '';
     index = indexLightbox;
-    console.log('index display:', index);
     const media = mediasArray[index];
     const type = media.image ? 'img' : 'video';
     const mediaModel = mediaFactory(media);
@@ -137,7 +137,6 @@ const initMediaLightbox = async (event) => {
     event.preventDefault();
     let indexLightbox = mediasArray.findIndex(obj => obj.id === parseInt(event.target.dataset.id));
     index = indexLightbox;
-    console.log('index :', index);
     displayMediaLightbox(indexLightbox);
 }
 

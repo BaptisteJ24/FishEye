@@ -8,6 +8,7 @@ import { validForm, resetForm, checkFormData } from './components/form.js';
 
 let loadPage = async () => { };
 let loadEvents = async () => { };
+let keydownListener = () => { };
 
 switch (getCurrentPage()) {
     case 'photographer': {
@@ -32,11 +33,6 @@ switch (getCurrentPage()) {
                 submit.addEventListener('click', validForm)
             });
 
-            /* onclick in close form button, resetForm. */
-            document.querySelectorAll('.js-form-reset').forEach(reset => {
-                reset.addEventListener('click', resetForm)
-            });
-
             /* when focusout in form input, checkFormData. */
             const form = document.getElementById('contact__form');
             Array.from(form.elements).forEach(element => {
@@ -51,30 +47,44 @@ switch (getCurrentPage()) {
             });
 
             /* onclick in media, show lightbox. */
-            document.querySelectorAll('.media__link').forEach((link) => {
-                link.addEventListener('click', async (e) => {
-                    await photographerPage.initMediaLightbox(e);
-                    document.getElementById('media_lightbox').classList.remove('hide');
+            document.querySelectorAll('.media__link-media').forEach((mediaLink) => {
 
-                    /* onclick in close button, hide lightbox. */
-                    document.querySelector('.js-lightbox-close').addEventListener('click', () => {
-                        document.getElementById('media_lightbox').classList.add('hide');
+                const displayMediaLightbox = async (e) => {                  
+                    if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))) { // e.key === ' ' for spacebar
+                        e.stopImmediatePropagation();
+                        await photographerPage.initMediaLightbox(e);
+                        openModal(e);
 
-                        /* remove all event to avoid multiple event listeners. */
-                        document.querySelector('.js-lightbox-close').removeEventListener('click', () => {
-                            document.getElementById('media_lightbox').classList.add('hide');
+                        /* onclick in close button, hide lightbox. */
+                        document.querySelector('.js-lightbox-close').addEventListener('click', () => {
+                            /* remove all event to avoid multiple event listeners. */
+                            document.querySelector('.js-lightbox-next').removeEventListener('click', photographerPage.nextMediaInLightbox);
+                            document.querySelector('.js-lightbox-previous').removeEventListener('click', photographerPage.previousMediaInLightbox);
+                            window.removeEventListener('keydown', keydownListener);
                         });
-                        document.querySelector('.js-lightbox-next').removeEventListener('click', photographerPage.nextMediaInLightbox);
-                        document.querySelector('.js-lightbox-previous').removeEventListener('click', photographerPage.previousMediaInLightbox);
-                    });
-                    
-                    /* onclick in next button, nextMediaInLightbox. */
-                    document.querySelector('.js-lightbox-next').addEventListener('click', photographerPage.nextMediaInLightbox);
 
-                    /* onclick in previous button, previousMediaInLightbox. */
-                    document.querySelector('.js-lightbox-previous').addEventListener('click', photographerPage.previousMediaInLightbox);
-                });
+                        /* onclick in next button, nextMediaInLightbox. */
+                        document.querySelector('.js-lightbox-next').addEventListener('click', photographerPage.nextMediaInLightbox);
+                        /* onclick in previous button, previousMediaInLightbox. */
+                        document.querySelector('.js-lightbox-previous').addEventListener('click', photographerPage.previousMediaInLightbox);
+                        keydownListener = (e) => {
+                            if (e.key === 'Left' || e.key === 'ArrowLeft') {
+                                photographerPage.previousMediaInLightbox();
+                            }
+                            if (e.key === 'Right' || e.key === 'ArrowRight') {
+                                photographerPage.nextMediaInLightbox();
+                            }
+                        }
+                        window.addEventListener('keydown', keydownListener);
+                    }
+                }
+
+                mediaLink.addEventListener('click', displayMediaLightbox);
+                mediaLink.addEventListener('keydown', displayMediaLightbox);
             });
+
+            /*accessibility event*/
+
         }
         break;
     }
