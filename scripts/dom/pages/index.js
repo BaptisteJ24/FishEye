@@ -1,10 +1,10 @@
-import { hideLoader, getCurrentPage, getDataByProperty } from '../../utils/utils.js';
+import { getDataByProperty } from '../../utils/utils.js';
 import { photographerFactory } from '../factories/photographer.js';
 
 const getPhotographers = async () => {
     //  Requête fetch pour récupérer les données des photographes dans data/photographers.json
     try {
-        const photographersArray = await getDataByProperty('../../data/photographers.json', 'photographers');
+        const photographersArray = await getDataByProperty('./data/photographers.json', 'photographers');
         return ({ photographers: photographersArray })
     }
     catch (error) {
