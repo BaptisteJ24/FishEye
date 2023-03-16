@@ -27,18 +27,18 @@
     </header>
 
     <div class="dropdown">
-      <label id="dropdown__label" class="dropdown__label">Trier par : </label>
+      <label id="dropdown__label" for="dropdown__selected" class="dropdown__label">Trier par : </label>
       <div class="dropdown__list-container">
-        <ul class="dropdown__list" role="button" aria-expanded="false" aria-haspopup="listbox" aria-label="Open sort list">
-          <li role="listbox" aria-labelledby="dropdown__label" id="dropdown__selected"
+        <ul id="dropdown__list" class="dropdown__list" role="listbox" aria-expanded="false" aria-haspopup="listbox" aria-label="Open sort list">
+          <li role="option" aria-labelledby="dropdown__label dropdown__selected__option" id="dropdown__selected"   
             class="dropdown__list-item dropdown__selected" tabindex="0" data-value="popularity" data-text="Popularité"
             aria-label="popularity">
-            <span class="dropdown__placeholder dropdown--text-style">Popularité</span>
+            <span id="dropdown__selected__option" class="dropdown__placeholder dropdown--text-style">Popularité</span>
             <span class="fa-solid fa-chevron-down dropdown__chevron dropdown--text-style"></span>
           </li>
-          <li class="dropdown__list-item dropdown__list-item--border-top dropdown--text-style hide" tabindex="0"
+          <li role="option" class="dropdown__list-item dropdown__list-item--border-top dropdown--text-style hide" tabindex="0"
             aria-label="date" data-value="date" data-text="Date"> Date </li>
-          <li class="dropdown__list-item dropdown__list-item--border-top dropdown--text-style hide" tabindex="0"
+          <li role="option" class="dropdown__list-item dropdown__list-item--border-top dropdown--text-style hide" tabindex="0"
             aria-label="title" data-value="title" data-text="Titre"> Titre </li>
         </ul>
       </div>
@@ -48,51 +48,7 @@
 
     </section>
 
-    <div id="media__lightbox" class="media__lightbox hide">
-      <aside class="lightbox" role="dialog" aria-label="image closeup view" aria-modal="false" aria-hidden="true">
-        <div class="lightbox__content">
-          <button class="fas fa-chevron-left js-lightbox-previous lightbox__chevron" aria-label="previous media">
-          </button>
-          <div class="lightbox__media-title"></div>
-          <button class="fas fa-chevron-right js-lightbox-next lightbox__chevron" aria-label="Next media">
-          </button>
-          <button class="fas fa-close js-modal-close js-lightbox-close lightbox__close" aria-label="close dialog" data-modal="media_lightbox"></button>
-        </div>
-      </aside>
-    </div>
-      
-    <div id="contact_modal" class="contact_modal hide">
-      <div class="modal" role="dialog">
-        <header class="header">
-          <div class="modal__title-cross-container">
-            <h2 class="h2">Contactez-moi</h2>
-            <img src="../assets/icons/close.svg" alt="close cross button" class="js-modal-close js-form-reset" data-form="contact__form">
-          </div>
-          <p class="modal__header__name"></p>
-        </header>
-        <form class="modal__form" id="contact__form" role="form" aria-label="Contact Form">
-          <ul>
-            <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
-              <label for="firstname">Prénom *</label>
-              <input id="firstname" type="text" name="firstname" aria-label="firstname" placeholder="Toto">
-            </li>
-            <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
-              <label for="lastname">Nom *</label>
-              <input id="lastname" type="text" name="lastname" aria-label="lastname" placeholder="Dupont">
-            </li>
-            <li class="formData" data-error-message="Veuillez entrer une adresse mail valide.">
-              <label for="email">Email *</label>
-              <input id="email" type="email" name="email" aria-label="email" placeholder="toto.dupont@gmail.com">
-            </li>
-            <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
-              <label for="message">Votre message *</label>
-              <textarea id="message" name="message" aria-label="message" placeholder="Votre message..."></textarea>
-            </li>
-          </ul>
-          <button class="button js-form-submit" type="submit" data-form="contact__form">Envoyer</button>
-        </form>
-      </div>
-    </div>
+    
 
     <aside class="photographer__aside">
 
@@ -101,6 +57,56 @@
 
 
   </main>
+  <div id="media__lightbox" class="media__lightbox hide" role="dialog" aria-label="image closeup view" aria-modal="false" aria-hidden="true">
+    <div class="lightbox">
+      <div class="lightbox__content">
+        <button class="fas fa-chevron-left js-lightbox-previous lightbox__chevron" aria-label="previous media">
+        </button>
+        <div class="lightbox__media-title"></div>
+        <button class="fas fa-chevron-right js-lightbox-next lightbox__chevron" aria-label="Next media">
+        </button>
+        <button class="fas fa-close js-modal-close js-lightbox-close lightbox__close" aria-label="close dialog" data-modal="media_lightbox"></button>
+      </div>
+    </div>
+  </div>
+    
+  <div id="contact_modal" class="contact_modal hide" role="dialog" aria-label="Contact-me" aria-modal="false" aria-hidden="true">
+    <div class="modal js-modal-form-empty">
+      <header class="header">
+        <div class="modal__title-cross-container">
+          <h2 class="h2">Contactez-moi</h2>
+          <img src="../assets/icons/close.svg" alt="close cross button" class="js-modal-close js-form-reset" data-form="contact__form">
+        </div>
+        <p class="modal__header__name"></p>
+      </header>
+      <form class="modal__form" id="contact__form" role="form" aria-label="Contact Form">
+        <ul>
+          <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
+            <label for="firstname">Prénom *</label>
+            <input id="firstname" type="text" name="firstname" aria-label="firstname" placeholder="Toto" aria-required="true" required>
+          </li>
+          <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
+            <label for="lastname">Nom *</label>
+            <input id="lastname" type="text" name="lastname" aria-label="lastname" placeholder="Dupont" aria-required="true" required>
+          </li>
+          <li class="formData" data-error-message="Veuillez entrer une adresse mail valide.">
+            <label for="email">Email *</label>
+            <input id="email" type="email" name="email" aria-label="email" placeholder="toto.dupont@gmail.com" aria-required="true" required>
+          </li>
+          <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
+            <label for="message">Votre message *</label>
+            <textarea id="message" name="message" aria-label="message" placeholder="Votre message..." aria-required="true" required></textarea>
+          </li>
+        </ul>
+        <button class="button js-form-submit" type="submit" data-form="contact__form">Envoyer</button>
+      </form>
+    </div>
+    <div class="modal modal-success hide" aria-hidden="true">
+      <p class="modal-success__text">Votre message a bien été envoyé.</p>
+      <p class="modal-success__text js-modal-success__name">Merci de l'intérêt que vous portez à </p>
+      <button class="button modal-success__button js-modal-close js-form-reset" data-form="contact__form">Fermer</button>
+    </div>
+  </div>
   <footer>
 
   </footer>

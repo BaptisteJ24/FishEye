@@ -173,16 +173,18 @@
         display: block;
         height: 100%;
         cursor: pointer;
+
         &:focus-visible {
             outline: 3px solid #901C1C;
             outline-offset: -3px;
         }
+
         &-media {
             width: 100%;
             height: 100%;
             object-fit: cover;
             overflow-clip-margin: unset;
-    
+
             &-container {
                 width: 100%;
                 aspect-ratio: 7 / 6;
@@ -201,126 +203,144 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        overflow: scroll;
+        overflow: auto;
         padding: 40px 90px;
     }
 }
 
 .contact_modal {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: fixed;
     z-index: 6;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    margin: 0 -100px;
+    margin: 0;
     overflow: auto;
+}
 
-    .modal {
-        border-radius: 5px;
-        background-color: #DB8876;
-        width: 60%;
-        margin: 1% auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
+.modal {
+    border-radius: 5px;
+    background-color: #DB8876;
+    width: 60%;
+    margin: 1% auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+
+    &-success {
+        position: absolute;
+        justify-content: center;
         padding: 35px;
+        min-height: 70vh;
 
-        .header {
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-            height: max-content;
-            margin: 0 0 30px;
-
-            img {
-                cursor: pointer;
-            }
-
+        &__text {
+            font-size: 24px;
+            font-weight: 500;
+            margin: 15px 0;
         }
 
-        &__title-cross-container {
+        &__button {
+            margin: 15px 0;
+        }
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        height: max-content;
+        margin: 0 0 30px;
+
+        img {
+            cursor: pointer;
+        }
+
+    }
+
+    &__title-cross-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .h2,
+    .modal__header__name {
+        font-size: 58px;
+        font-weight: normal;
+    }
+
+    &__form {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+
+        ul {
+            width: 100%;
+        }
+
+        li:last-child {
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .h2,
-        .modal__header__name {
-            font-size: 58px;
-            font-weight: normal;
-        }
-
-        &__form {
-            display: flex;
-            width: 100%;
             flex-direction: column;
-            align-items: flex-start;
+        }
 
-            ul {
-                width: 100%;
+        .formData {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            width: 100%;
+
+            &.valid {
+
+                input,
+                textarea {
+                    border: 2px solid green;
+                }
             }
 
-            li:last-child {
-                display: flex;
-                flex-direction: column;
-            }
+            &[data-error-visible="true"] {
 
-            .formData {
-                display: flex;
-                flex-direction: column;
-                list-style: none;
-                width: 100%;
-
-                &.valid {
-
-                    input,
-                    textarea {
-                        border: 2px solid green;
-                    }
+                &::after {
+                    content: attr(data-error-message);
+                    color: red;
+                    font-size: 12px;
+                    margin: 0;
+                    width: 100%;
+                    text-align: right;
                 }
 
-                &[data-error-visible="true"] {
-
-                    &::after {
-                        content: attr(data-error-message);
-                        color: red;
-                        font-size: 12px;
-                        margin: 0;
-                        width: 100%;
-                        text-align: right;
-                    }
-
-                    input,
-                    textarea {
-                        border: 2px solid red;
-                    }
+                input,
+                textarea {
+                    border: 2px solid red;
                 }
-
             }
 
+        }
 
-            label {
-                color: #312E2E;
-                font-size: 32px;
-            }
+        label {
+            color: #312E2E;
+            font-size: 32px;
+        }
 
-            input,
-            textarea {
-                width: 100%;
-                height: 50px;
-                border: none;
-                border-radius: 5px;
-                margin: 10px 0;
-                padding: 10px;
-            }
+        input,
+        textarea {
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 10px;
+        }
 
-            textarea {
-                height: 100px;
-            }
+        textarea {
+            height: 100px;
         }
     }
 }

@@ -1,4 +1,4 @@
-import { setAttributes } from '../../utils/utils.js';
+import { setAttributes } from "../../utils/utils.js";
 
 const mediaFactory = (data) => {
 
@@ -9,57 +9,58 @@ const mediaFactory = (data) => {
         const videoSrc = mediaSrc + video;
 
         const getMediaDOM = (type) => {
-            const article = document.createElement('article');
+            const article = document.createElement("article");
             article.setAttribute("class", "article media__article");
 
             let media;
             if (type === "img") {
-                media = document.createElement('img');
+                media = document.createElement("img");
                 media.setAttribute("src", pictureSrc);
+                media.setAttribute("alt", title);
             }
             else if (type === "video") {
-                media = document.createElement('video');
-                const src = document.createElement('source');
-                const videoDownload = document.createElement('a');
-                videoDownload.setAttribute("href", videoSrc);
+                media = document.createElement("video");
+                const src = document.createElement("source");
                 setAttributes(src, { "src": videoSrc, "type": "video/mp4" });
-                media.append(src, 'Download the', videoDownload, 'video');
+                media.append(src);
+                media.setAttribute("title", title);
             }
-            setAttributes(media, { "alt": title, "class": "media__link-media", "data-id": id, "data-modal" : "media__lightbox", "tabindex": "0"});
+            setAttributes(media, { "class": "media__link-media", "data-id": id, "data-modal" : "media__lightbox", "tabindex": "0"});
             
 
-            const link = document.createElement('a');
-            setAttributes(link, { "class" : "media__link", "href" : "#", "tabindex": "-1"});
+            const link = document.createElement("a");
+            setAttributes(link, { "class" : "media__link", "href" : "#", "tabindex": "-1", "aria-label" : "Open media"});
             link.append(media);
 
-            const divImg = document.createElement('div');
+            const divImg = document.createElement("div");
             divImg.setAttribute("class", "media__link-media-container");
             divImg.append(link);
 
-            const divDescription = document.createElement('div');
+            const divDescription = document.createElement("div");
             divDescription.setAttribute("class", "media__description");
 
-            const textTitle = document.createElement('p');
+            const textTitle = document.createElement("p");
             textTitle.setAttribute("class", "media__title");
             textTitle.textContent = title;
 
-            const divLikes = document.createElement('div');
+            const divLikes = document.createElement("div");
             divLikes.setAttribute("class", "media__likes");
 
-            const textLikes = document.createElement('p');
+            const textLikes = document.createElement("p");
             textLikes.setAttribute("class", "media__likes-number");
             textLikes.textContent = likes;
 
-            const divHeart = document.createElement('button');
+            const divHeart = document.createElement("button");
             divHeart.setAttribute("class", "heart");
+            divHeart.setAttribute("aria-label", "Like this media");
 
-            const heartEmpty = document.createElement('span');
+            const heartEmpty = document.createElement("span");
             heartEmpty.setAttribute("class", "far fa-heart heart__icon heart__icon--empty");
 
-            const heartHideContainer = document.createElement('span');
+            const heartHideContainer = document.createElement("span");
             heartHideContainer.setAttribute("class", "heart__icon heart__icon--hide-container");
 
-            const heartHide = document.createElement('span');
+            const heartHide = document.createElement("span");
             heartHide.setAttribute("class", "fas fa-heart heart__icon--hide");
 
             heartHideContainer.append(heartHide);
@@ -69,35 +70,35 @@ const mediaFactory = (data) => {
             divDescription.append(textTitle, divLikes);
             divLikes.append(textLikes, divHeart);
             return (article);
-        }
+        };
 
         const getMediaLightboxDOM = (type) => {
 
             let media;
             if (type === "img") {
-                media = document.createElement('img');
+                media = document.createElement("img");
                 setAttributes(media, { "src": pictureSrc, "alt": title, "class": "lightbox__media" });
             }
             else if (type === "video") {
-                media = document.createElement('video');
-                const src = document.createElement('source');
+                media = document.createElement("video");
+                const src = document.createElement("source");
                 setAttributes(media, { "controls": "", "class": "lightbox__media" });
                 setAttributes(src, { "src": videoSrc, "type": "video/mp4" });
                 media.append(src);
             }
 
-            const textTitle = document.createElement('p');
+            const textTitle = document.createElement("p");
             textTitle.setAttribute("class", "lightbox__title");
             textTitle.textContent = title;
 
             return { media: media, textTitle: textTitle };
-        }
+        };
 
-        return { id, photographerId, title, pictureSrc, videoSrc, date, price, likes, getMediaDOM, getMediaLightboxDOM }
+        return { id, photographerId, title, pictureSrc, videoSrc, date, price, likes, getMediaDOM, getMediaLightboxDOM };
     }
     catch (error) {
-        console.error('ça marche pas');
+        console.error("ça marche pas");
     }
-}
+};
 
 export { mediaFactory };

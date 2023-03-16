@@ -591,22 +591,25 @@ a {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  overflow: scroll;
+  overflow: auto;
   padding: 40px 90px;
 }
 
 .contact_modal {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: fixed;
   z-index: 6;
   top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  margin: 0 -100px;
+  margin: 0;
   overflow: auto;
 }
-.contact_modal .modal {
+
+.modal {
   border-radius: 5px;
   background-color: #DB8876;
   width: 60%;
@@ -617,51 +620,65 @@ a {
   justify-content: space-between;
   padding: 35px;
 }
-.contact_modal .modal .header {
+.modal-success {
+  position: absolute;
+  justify-content: center;
+  padding: 35px;
+  min-height: 70vh;
+}
+.modal-success__text {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 15px 0;
+}
+.modal-success__button {
+  margin: 15px 0;
+}
+.modal .header {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
   height: max-content;
   margin: 0 0 30px;
 }
-.contact_modal .modal .header img {
+.modal .header img {
   cursor: pointer;
 }
-.contact_modal .modal__title-cross-container {
+.modal__title-cross-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
 }
-.contact_modal .modal .h2,
-.contact_modal .modal .modal__header__name {
+.modal .h2,
+.modal .modal__header__name {
   font-size: 58px;
   font-weight: normal;
 }
-.contact_modal .modal__form {
+.modal__form {
   display: flex;
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
 }
-.contact_modal .modal__form ul {
+.modal__form ul {
   width: 100%;
 }
-.contact_modal .modal__form li:last-child {
+.modal__form li:last-child {
   display: flex;
   flex-direction: column;
 }
-.contact_modal .modal__form .formData {
+.modal__form .formData {
   display: flex;
   flex-direction: column;
   list-style: none;
   width: 100%;
 }
-.contact_modal .modal__form .formData.valid input,
-.contact_modal .modal__form .formData.valid textarea {
+.modal__form .formData.valid input,
+.modal__form .formData.valid textarea {
   border: 2px solid green;
 }
-.contact_modal .modal__form .formData[data-error-visible=true]::after {
+.modal__form .formData[data-error-visible=true]::after {
   content: attr(data-error-message);
   color: red;
   font-size: 12px;
@@ -669,16 +686,16 @@ a {
   width: 100%;
   text-align: right;
 }
-.contact_modal .modal__form .formData[data-error-visible=true] input,
-.contact_modal .modal__form .formData[data-error-visible=true] textarea {
+.modal__form .formData[data-error-visible=true] input,
+.modal__form .formData[data-error-visible=true] textarea {
   border: 2px solid red;
 }
-.contact_modal .modal__form label {
+.modal__form label {
   color: #312E2E;
   font-size: 32px;
 }
-.contact_modal .modal__form input,
-.contact_modal .modal__form textarea {
+.modal__form input,
+.modal__form textarea {
   width: 100%;
   height: 50px;
   border: none;
@@ -686,7 +703,7 @@ a {
   margin: 10px 0;
   padding: 10px;
 }
-.contact_modal .modal__form textarea {
+.modal__form textarea {
   height: 100px;
 }
 

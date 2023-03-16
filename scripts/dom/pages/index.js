@@ -1,15 +1,15 @@
-import { getDataByProperty } from '../../utils/utils.js';
-import { photographerFactory } from '../factories/photographer.js';
+import { getDataByProperty } from "../../utils/utils.js";
+import { photographerFactory } from "../factories/photographer.js";
 
 const getPhotographers = async () => {
     //  Requête fetch pour récupérer les données des photographes dans data/photographers.json
     try {
-        const photographersArray = await getDataByProperty('./data/photographers.json', 'photographers');
-        return ({ photographers: photographersArray })
+        const photographersArray = await getDataByProperty("./data/photographers.json", "photographers");
+        return ({ photographers: photographersArray });
     }
     catch (error) {
-        console.error('Erreur lors de la récupération des données : ', error);
-    };
+        console.error("Erreur lors de la récupération des données : ", error);
+    }
 };
 
 const displayData = async (photographers) => {

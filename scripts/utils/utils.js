@@ -1,4 +1,4 @@
-import { errorDOM } from './error.js';
+import { errorDOM } from "./error.js";
 
 /**
  * description : set attributes to an element.
@@ -8,13 +8,13 @@ import { errorDOM } from './error.js';
  * @example setAttributes(img, {"src" : ./images/img.png, "class" : "img" });
  */
 const setAttributes = (el, attrs) => {
-    if (typeof attrs !== 'object') {
-        throw new Error('attrs is not an object');
+    if (typeof attrs !== "object") {
+        throw new Error("attrs is not an object");
     }
     for (var key in attrs) {
         el.setAttribute(key, attrs[key]);
     }
-}
+};
 
 
 /**
@@ -22,9 +22,9 @@ const setAttributes = (el, attrs) => {
  * @returns {string} - current page name.
  */
 const getCurrentPage = () => {
-    const currentPage = document.querySelector('body').dataset.page;
+    const currentPage = document.querySelector("body").dataset.page;
     return currentPage;
-}
+};
 
 
 // params: string. Return: array
@@ -37,7 +37,7 @@ const getAllData = async (url) => {
     catch (error) {
         console.error(`Erreur lors de la récupération des données : ${error}`);
     }
-}
+};
 
 const getDataByProperty = async (url, property) => { // params: string, string. Return: array
     try {
@@ -48,9 +48,9 @@ const getDataByProperty = async (url, property) => { // params: string, string. 
     catch (error) {
         console.error(`Erreur lors de la récupération des données : ${error}`);
     }
-}
+};
 
-const getDataById = async (url, property = null, id, propertyId = 'id') => { // params: string, string, number, string. Return: array
+const getDataById = async (url, property = null, id, propertyId = "id") => { // params: string, string, number, string. Return: array
     try {
         if (property === null) {
             const data = await getAllData(url);
@@ -66,18 +66,18 @@ const getDataById = async (url, property = null, id, propertyId = 'id') => { // 
             return dataById[0];
         }
         else if (dataById.length === 0) {
-            throw new Error('Aucune donnée trouvée avec l\'id : ' + id);
+            throw new Error("Aucune donnée trouvée avec l'id : " + id);
         }
 
         return dataById;
     }
     catch (error) {
-        document.querySelector('.loader-container').innerHTML = '';
-        document.querySelector('.loader-container').style.display = 'none';
-        document.querySelector('main').innerHTML = '';
-        document.querySelector('main').append(errorDOM());
+        document.querySelector(".loader-container").innerHTML = "";
+        document.querySelector(".loader-container").style.display = "none";
+        document.querySelector("main").innerHTML = "";
+        document.querySelector("main").append(errorDOM());
         console.error(`Erreur lors de la récupération des données : ${error}`);
     }
-}
+};
 
 export { setAttributes, getCurrentPage, getAllData, getDataByProperty, getDataById };

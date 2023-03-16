@@ -1,22 +1,20 @@
-const path = require('path');
-const glob = require('glob');
+import { resolve } from "path";
+import { sync } from "glob";
 
-module.exports = {
-    entry: glob.sync("./scripts/**/*.js"),
-    output: {
-        path: path.resolve(__dirname, './dist'),
-        filename: 'bundle.js'
-    },
-    mode: 'development',
-    module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: "babel-loader",
-            options: {
-                presets: ['@babel/preset-env']
-            }
-        }]
-    }
+export const entry = sync("./scripts/**/*.js");
+export const output = {
+    path: resolve(__dirname, "./dist"),
+    filename: "bundle.js"
+};
+export const mode = "development";
+export const module = {
+    rules: [{
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+        options: {
+            presets: ["@babel/preset-env"]
+        }
+    }]
 };
 

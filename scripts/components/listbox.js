@@ -45,15 +45,15 @@ if (getCurrentPage() === "photographer") {
             toggleListVisibility();
             dropdownButton.removeEventListener("focusout", focusOutDropdown);
         }
-    }
+    };
 
     // event listener onclick in dropdown
-    function handleDropdownEvent(e) {
+    const handleDropdownEvent = (e) => {
         if (e.type === "click" || (e.type === "keydown" && (e.key === "Enter" || e.key === " "))) {
             dropdownButton.removeEventListener("focusout", focusOutDropdown);
             toggleListVisibility();
         }
-    }
+    };
     dropdownButton.addEventListener("click", handleDropdownEvent);
     dropdownButton.addEventListener("keydown", handleDropdownEvent);
 
@@ -64,7 +64,7 @@ if (getCurrentPage() === "photographer") {
         dropdownSelected.dataset.value = listItemObj[e.target.dataset.value].value;
         dropdownSelected.dataset.text = listItemObj[e.target.dataset.value].text;
         dropdown__placeholder.innerText = listItemObj[e.target.dataset.value].text;
-    }
+    };
 
     // function to change actual dropdown item selected by previousItem selected.
     const changeItemsInDropdown = (e, previousItem) => {
@@ -72,7 +72,7 @@ if (getCurrentPage() === "photographer") {
         e.target.dataset.value = previousItem.value;
         e.target.dataset.text = previousItem.text;
         e.target.innerText = previousItem.text;
-    }
+    };
 
     // event listener onclick in dropdown list items
     listItemsWithBorder.forEach(item => {
