@@ -1,8 +1,10 @@
 import { getDataByProperty } from "../../utils/utils.js";
 import { photographerFactory } from "../factories/photographer.js";
 
+/**
+ * description : get all photographers form photographers.json file
+ */
 const getPhotographers = async () => {
-    //  Requête fetch pour récupérer les données des photographes dans data/photographers.json
     try {
         const photographersArray = await getDataByProperty("./data/photographers.json", "photographers");
         return ({ photographers: photographersArray });

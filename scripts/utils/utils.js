@@ -16,18 +16,22 @@ const setAttributes = (el, attrs) => {
     }
 };
 
-
 /**
  * description : get the current page with the data-page attribute of the body.
  * @returns {string} - current page name.
+ * @example getCurrentPage() => "index" or "photographer"
  */
 const getCurrentPage = () => {
     const currentPage = document.querySelector("body").dataset.page;
     return currentPage;
 };
 
-
-// params: string. Return: array
+/**
+ * description : get all data from a json file.
+ * @param {string} url - url of the json file.
+ * @returns {Object} - data from the json file.
+ * @example getAllData("./data.json") => { "data": [ { "id": 1, "name": "name1" }, { "id": 2, "name": "name2" } ] }
+ */
 const getAllData = async (url) => {
     try {
         const response = await fetch(url);
@@ -39,7 +43,14 @@ const getAllData = async (url) => {
     }
 };
 
-const getDataByProperty = async (url, property) => { // params: string, string. Return: array
+/**
+ * description : get data from a json file by property.
+ * @param {string} url - url of the json file.
+ * @param {string} property - property of the json file.
+ * @returns {Array} - data from the json file.
+ * @example getDataByProperty("./data.json", "data") => [ { "id": 1, "name": "name1" }, { "id": 2, "name": "name2" } ]
+ */
+const getDataByProperty = async (url, property) => {
     try {
         const data = await getAllData(url);
         const dataByProperty = data[property];
@@ -50,6 +61,15 @@ const getDataByProperty = async (url, property) => { // params: string, string. 
     }
 };
 
+/**
+ * description : get data from a json file by id.
+ * @param {string} url - url of the json file.
+ * @param {string} property - property of the json file.
+ * @param {number} id - id of the data.
+ * @param {string} propertyId - property of the data.
+ * @returns {Array} - data from the json file.
+ * @example getDataById("./data.json", "data", 1, "id") => [ { "id": 1, "name": "name1" } ]
+ */
 const getDataById = async (url, property = null, id, propertyId = "id") => { // params: string, string, number, string. Return: array
     try {
         if (property === null) {

@@ -19,9 +19,6 @@ case "photographer": {
         await photographerPage.initPhotographerTotalLikesAndPrice();
     };
 
-    /**
-         * description: load all events for the page.
-         */
     loadEvents = async () => {
         /* onclick in modal button, openModal. */
         document.querySelectorAll(".js-modal").forEach(modal => {

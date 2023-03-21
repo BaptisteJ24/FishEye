@@ -5,18 +5,11 @@ import { mediaFactory } from "../factories/media.js";
 let mediasArray = [];
 let index = 0;
 
-const getMedia = async () => { // return : object
-    try {
-        const mediaArray = await getDataByProperty("../data/photographers.json", "media");
-        return ({ media: mediaArray });
 
-    }
-    catch (error) {
-        console.error("Erreur lors de la récupération des données : ", error);
-    }
-};
-
-const getPhotographerId = async () => { // return : number (id)
+/**
+ * description : get photographer id from url
+ */
+const getPhotographerId = () => {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("id");
@@ -26,11 +19,28 @@ const getPhotographerId = async () => { // return : number (id)
         console.error("Erreur lors de la récupération de l'id : ", error);
     }
 };
+let photographerId = getPhotographerId();
 
-const getPhotographerDetailsById = async () => { // return : object
+
+/**
+ * description : get all media form photographer.json file
+ */
+const getMedia = async () => {
     try {
-        const photographerId = await getPhotographerId();
-        const photographerDetails = await getDataById("../data/photographers.json", "photographers", photographerId);
+        const mediaArray = await getDataByProperty("../data/photographers.json", "media");
+        return ({ media: mediaArray });
+    }
+    catch (error) {
+        console.error("Erreur lors de la récupération des données : ", error);
+    }
+};
+
+/**
+ * description : get photographer details according to id
+ */
+const getPhotographerDetailsById = async (id) => { // return : object
+    try {
+        const photographerDetails = await getDataById("../data/photographers.json", "photographers", id);
         if (photographerDetails === undefined) {
             throw new Error("Photographe introuvable");
         }
@@ -41,11 +51,13 @@ const getPhotographerDetailsById = async () => { // return : object
     }
 };
 
-const getMediaById = async () => {
+/**
+ * description : get photographers media according to id
+ */
+const getMediaById = async (id) => {
     try {
-        const photographerId = await getPhotographerId();
         const mediaArray = await getMedia();
-        const mediaById = mediaArray.media.filter((obj) => obj.photographerId === JSON.parse(photographerId));
+        const mediaById = mediaArray.media.filter((obj) => obj.photographerId === JSON.parse(id));
         return ({ medias: mediaById });
     }
     catch (error) {
@@ -88,13 +100,13 @@ const displayPhotographerTotalLikesAndPrice = async (medias, photographer) => {
 };
 
 const initPhotographerTotalLikesAndPrice = async () => {
-    const { medias } = await getMediaById();
-    const photographer = await getPhotographerDetailsById();
+    const { medias } = await getMediaById(photographerId);
+    const photographer = await getPhotographerDetailsById(photographerId);
     displayPhotographerTotalLikesAndPrice(medias, photographer);
 };
 
 const initMedia = async (sortOption = "popularity") => {
-    const { medias } = await getMediaById();
+    const { medias } = await getMediaById(photographerId);
 
     switch (sortOption) {
     case "popularity":
@@ -116,7 +128,7 @@ const initMedia = async (sortOption = "popularity") => {
 };
 
 const initPhotographerDetails = async () => {
-    const photographerDetails = await getPhotographerDetailsById();
+    const photographerDetails = await getPhotographerDetailsById(photographerId);
     displayPhotographerDetails(photographerDetails);
     const modalHeaderName = document.querySelector(".modal__header__name");
     modalHeaderName.textContent = photographerDetails.name;

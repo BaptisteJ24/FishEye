@@ -1,5 +1,7 @@
 import { setAttributes } from "./utils.js";
 
+// Error page DOM which is displayed when the user try to access to a photographer page with an invalid id
+
 let rootUrl = window.location.origin;
 const errorDOM = () => {
     const divError = document.createElement("div");
