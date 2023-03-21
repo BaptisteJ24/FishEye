@@ -1,3 +1,7 @@
+/**
+ * description: update the like counter
+ * @param {event} like - event
+ */
 const updateLike = async (like) => {
     const likesTarget = like.target;
     let likeCounterTarget = likesTarget.parentElement.querySelector(".media__likes-number");

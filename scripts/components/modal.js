@@ -44,8 +44,6 @@ const closeModal = (e) => {
         el.removeEventListener("click", closeModal);
     });
     if (modal.querySelector(".js-form-reset") && modal) {
-        console.log("modal", modal);
-        console.log("modal.querySelectorAll", modal.querySelectorAll(".js-form-reset"));
         const jsFormReset = modal.querySelectorAll(".js-form-reset");
         Array.from(jsFormReset).map((el) => {
             el.addEventListener("click", resetForm);

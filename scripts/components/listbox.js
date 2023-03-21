@@ -21,16 +21,16 @@ if (getCurrentPage() === "photographer") {
         return acc;
     }, {});
 
-    // function to toggle dropdown list visibility
+    /**
+     * description: toggle the dropdown list visibility
+     */
     const toggleListVisibility = () => {
-
         listItemsWithBorder.forEach(item => item.classList.toggle("hide"));
         dropdownChevron.classList.toggle("dropdown__expanded");
         dropdownButton.setAttribute("aria-expanded", dropdownChevron.classList.contains("dropdown__expanded"));
+        // If the dropdown is expanded, add the focusout event listener to the button
         if (dropdownChevron.classList.contains("dropdown__expanded")) {
             dropdownButton.setAttribute("aria-label", "Close sort list");
-            // Vérify if the new element on which the focus is made is in the dropdown list or not
-
             dropdownButton.addEventListener("focusout", focusOutDropdown);
         }
         else {
@@ -38,6 +38,9 @@ if (getCurrentPage() === "photographer") {
         }
     };
 
+    /**
+     * description: hide the dropdown list if the focus is outside of the dropdown
+     */
     const focusOutDropdown = (e) => {
         const isInDropdown = listItems.some((item) => item.contains(e.relatedTarget));
         // If the new element is not in the dropdown list, hide the list and reset the button
@@ -47,7 +50,9 @@ if (getCurrentPage() === "photographer") {
         }
     };
 
-    // event listener onclick in dropdown
+    /**
+     * description: handle the dropdown button click and keydown events
+     */
     const handleDropdownEvent = (e) => {
         if (e.type === "click" || (e.type === "keydown" && (e.key === "Enter" || e.key === " "))) {
             dropdownButton.removeEventListener("focusout", focusOutDropdown);
@@ -58,7 +63,9 @@ if (getCurrentPage() === "photographer") {
     dropdownButton.addEventListener("keydown", handleDropdownEvent);
 
 
-    // function to select dropdown item
+    /**
+     * description: select the dropdown item
+     */
     const selectDropdown = (e) => {
         dropdownSelected.setAttribute("aria-label", listItemObj[e.target.dataset.value].value);
         dropdownSelected.dataset.value = listItemObj[e.target.dataset.value].value;
@@ -66,7 +73,9 @@ if (getCurrentPage() === "photographer") {
         dropdown__placeholder.innerText = listItemObj[e.target.dataset.value].text;
     };
 
-    // function to change actual dropdown item selected by previousItem selected.
+    /**
+     * description: change the actual dropdown items with the previous selected item
+     */
     const changeItemsInDropdown = (e, previousItem) => {
         e.target.setAttribute("aria-label", previousItem.value);
         e.target.dataset.value = previousItem.value;
@@ -74,7 +83,6 @@ if (getCurrentPage() === "photographer") {
         e.target.innerText = previousItem.text;
     };
 
-    // event listener onclick in dropdown list items
     listItemsWithBorder.forEach(item => {
         item.addEventListener("click", async e => {
             const previousItem = listItemObj[dropdownSelected.dataset.value];

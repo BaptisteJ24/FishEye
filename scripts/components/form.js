@@ -3,6 +3,12 @@ const regex = {
     email: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 };
 
+/**
+ * description: check if the data is valid
+ * @param {array} formElements - array of form elements
+ * @param {object} data - object of form data
+ * @return {boolean} - true if the data is valid, false if not
+ */
 const validData = (formElements, data) => {
     let valid = false;
     let i = 0;
@@ -24,6 +30,11 @@ const validData = (formElements, data) => {
     return valid;
 };
 
+/**
+ * description: check if the form is valid and send the data to the console. 
+ * If the form is valid, display a success modal, if not, display errors messages.
+ * @param {event} e - event
+ */
 const validForm = (e) => {
     e.preventDefault();
     const form = document.getElementById(e.target.getAttribute("data-form"));
@@ -57,14 +68,22 @@ const validForm = (e) => {
         document.getElementsByClassName("modal-success")[0].removeAttribute("aria-hidden");
         document.getElementsByClassName("js-modal-form-empty")[0].classList.toggle("hide", true);
         document.getElementsByClassName("js-modal-form-empty")[0].setAttribute("aria-hidden", "true");
-        console.log("Formulaire validé :", data);
+
+        let dataValid = Object.values(data).map((el) => {
+            return el.value;
+        });
+        console.log("Formulaire validé :", dataValid);
+
     } 
     else {
         console.error("Formulaire non valide");
     }
 };
 
-
+/**
+ * description: reset the form and display the empty form modal
+ * @param {event} e - event
+ */
 const resetForm = (e) => {
     const form = document.getElementById(e.target.getAttribute("data-form"));
     const formElements = form.querySelectorAll(".formData");
@@ -73,13 +92,16 @@ const resetForm = (e) => {
         el.classList.toggle("valid", false);
     });
     form.reset();
-    console.log("Formulaire réinitialisé");
     document.getElementsByClassName("modal-success")[0].classList.toggle("hide", true);
     document.getElementsByClassName("js-modal-form-empty")[0].classList.toggle("hide", false);
     document.getElementsByClassName("modal-success")[0].setAttribute("aria-hidden", "true");
     document.getElementsByClassName("js-modal-form-empty")[0].removeAttribute("aria-hidden");
 };
 
+/**
+ * description: check if each form data is valid
+ * @param {event} e - event
+ */
 const checkFormData = (e) => {
     const formDataElement = e.target;
     const formData = formDataElement.parentNode;
@@ -106,6 +128,9 @@ const checkFormData = (e) => {
     }
 };
 
+/**
+ * description: push the photographer name in the success modal
+ */
 const pushPhotographerName = () => {
     const photographerName = document.getElementsByClassName("modal__header__name")[0].textContent;
     const modalSuccessName = document.getElementsByClassName("js-modal-success__name")[0];
