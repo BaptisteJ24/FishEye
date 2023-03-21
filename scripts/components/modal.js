@@ -60,11 +60,11 @@ const closeModal = (e) => {
 
 const focusInModal = (e) => {
     e.preventDefault();
-
+    focusableElements = Array.from(modal.querySelectorAll(focusableSelector));
     let focusableElementsVisible = focusableElements.filter((el) => {
         return el.offsetWidth > 0 || el.offsetHeight > 0;
     });
-
+    
     let index = focusableElementsVisible.findIndex(func => func === modal.querySelector(":focus"));
 
     e.shiftKey ? index-- : index++;
