@@ -97,18 +97,18 @@ const initMedia = async (sortOption = "popularity") => {
     const { medias } = await getMediaById();
 
     switch (sortOption) {
-        case "popularity":
-            medias.sort((a, b) => b.likes - a.likes);
-            break;
-        case "date":
-            medias.sort((a, b) => new Date(b.date) - new Date(a.date));
-            break;
-        case "title":
-            medias.sort((a, b) => a.title.localeCompare(b.title));
-            break;
-        default:
-            medias.sort((a, b) => b.likes - a.likes);
-            break;
+    case "popularity":
+        medias.sort((a, b) => b.likes - a.likes);
+        break;
+    case "date":
+        medias.sort((a, b) => new Date(b.date) - new Date(a.date));
+        break;
+    case "title":
+        medias.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+    default:
+        medias.sort((a, b) => b.likes - a.likes);
+        break;
     }
 
     displayMedia(medias);

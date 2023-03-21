@@ -29,20 +29,20 @@ const validForm = (e) => {
     const form = document.getElementById(e.target.getAttribute("data-form"));
     const data = Object.values(form.elements).reduce((acc, el) => {
         switch (el.nodeName) {
-            case "INPUT":
-                acc[el.name] = {
-                    value: el.value,
-                    type: el.type
-                };
-                break;
-            case "TEXTAREA":
-                acc[el.name] = {
-                    value: el.value,
-                    type: "text"
-                };
-                break;
-            default:
-                break;
+        case "INPUT":
+            acc[el.name] = {
+                value: el.value,
+                type: el.type
+            };
+            break;
+        case "TEXTAREA":
+            acc[el.name] = {
+                value: el.value,
+                type: "text"
+            };
+            break;
+        default:
+            break;
         }
         return acc;
     }, {});
@@ -86,12 +86,12 @@ const checkFormData = (e) => {
     let formDataType = "";
 
     switch (formDataElement.nodeName) {
-        case "INPUT":
-            formDataType = formDataElement.type;
-            break;
-        case "TEXTAREA":
-            formDataType = "text";
-            break;
+    case "INPUT":
+        formDataType = formDataElement.type;
+        break;
+    case "TEXTAREA":
+        formDataType = "text";
+        break;
     }
 
     if (regex[formDataType].test(formDataElement.value)) {

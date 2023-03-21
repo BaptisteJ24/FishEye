@@ -3,5 +3,4 @@ const hideLoader = () => {
     loader.classList.add("loader--hidden");
 };
 
-
 export { hideLoader };
