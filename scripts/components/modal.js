@@ -60,12 +60,18 @@ const closeModal = (e) => {
 
 const focusInModal = (e) => {
     e.preventDefault();
-    let index = focusableElements.findIndex(func => func === modal.querySelector(":focus"));
+
+    let focusableElementsVisible = focusableElements.filter((el) => {
+        return el.offsetWidth > 0 || el.offsetHeight > 0;
+    });
+
+    let index = focusableElementsVisible.findIndex(func => func === modal.querySelector(":focus"));
 
     e.shiftKey ? index-- : index++;
-    index = index < 0 ? focusableElements.length - 1 : index;
-    index = index >= focusableElements.length ? 0 : index;
-    focusableElements[index].focus();
+    index = index < 0 ? focusableElementsVisible.length - 1 : index;
+    index = index >= focusableElementsVisible.length ? 0 : index;
+    
+    focusableElementsVisible[index].focus();
 };
 
 const keydownEvent = (e) => {

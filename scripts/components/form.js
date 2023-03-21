@@ -54,7 +54,9 @@ const validForm = (e) => {
     if (validData(authorizedFormElements, data)) {
         pushPhotographerName();
         document.getElementsByClassName("modal-success")[0].classList.remove("hide");
+        document.getElementsByClassName("modal-success")[0].removeAttribute("aria-hidden");
         document.getElementsByClassName("js-modal-form-empty")[0].classList.toggle("hide", true);
+        document.getElementsByClassName("js-modal-form-empty")[0].setAttribute("aria-hidden", "true");
         console.log("Formulaire validé :", data);
     } 
     else {
@@ -65,9 +67,7 @@ const validForm = (e) => {
 
 const resetForm = (e) => {
     const form = document.getElementById(e.target.getAttribute("data-form"));
-    console.log("form", form);
     const formElements = form.querySelectorAll(".formData");
-    console.log("🚀 ~ file: form.js:70 ~ resetForm ~ formElements:", formElements);
     formElements.forEach((el) => {
         el.toggleAttribute("data-error-visible", false);
         el.classList.toggle("valid", false);
@@ -76,6 +76,8 @@ const resetForm = (e) => {
     console.log("Formulaire réinitialisé");
     document.getElementsByClassName("modal-success")[0].classList.toggle("hide", true);
     document.getElementsByClassName("js-modal-form-empty")[0].classList.toggle("hide", false);
+    document.getElementsByClassName("modal-success")[0].setAttribute("aria-hidden", "true");
+    document.getElementsByClassName("js-modal-form-empty")[0].removeAttribute("aria-hidden");
 };
 
 const checkFormData = (e) => {

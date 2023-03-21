@@ -566,7 +566,7 @@ a {
   height: 100%;
   cursor: pointer;
 }
-.media__link:focus-visible {
+.media__link :focus-visible {
   outline: 3px solid #901C1C;
   outline-offset: -3px;
 }
@@ -649,11 +649,22 @@ a {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  position: relative;
 }
 .modal .h2,
 .modal .modal__header__name {
   font-size: 58px;
   font-weight: normal;
+}
+.modal__cross {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 50px;
+  background: none;
+  border: none;
 }
 .modal__form {
   display: flex;
