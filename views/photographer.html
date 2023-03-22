@@ -21,11 +21,11 @@
   <header role="banner" class="header">
     <a href="../index.html"><img src="../assets/images/logo.png" class="header__logo" alt="FishEye Homepage"></a>
   </header>
+
   <main id="main" class="main photographer__main">
     <header class="header photographer__header">
       <div class="photographer__section photographer__section--without-margin"></div>
     </header>
-
     <div class="dropdown">
       <label id="dropdown__label" for="dropdown__selected" class="dropdown__label">Trier par : </label>
       <div class="dropdown__list-container">
@@ -43,14 +43,12 @@
         </ul>
       </div>
     </div>
-
     <section class="media__section">
     </section>
-
     <aside class="photographer__aside">
     </aside>
-
   </main>
+
   <div id="media__lightbox" class="media__lightbox hide" role="dialog" aria-label="image closeup view" aria-modal="false" aria-hidden="true">
     <div class="lightbox">
       <div class="lightbox__content">
@@ -77,7 +75,7 @@
         <ul>
           <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
             <label for="firstname">Prénom *</label>
-            <input id="firstname" type="text" name="firstname" aria-label="firstname" placeholder="Toto" aria-required="true" required>
+            <input id="firstname" type="text" name="firstname" aria-label="firstname" placeholder="Pierre" aria-required="true" required>
           </li>
           <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
             <label for="lastname">Nom *</label>
@@ -85,7 +83,7 @@
           </li>
           <li class="formData" data-error-message="Veuillez entrer une adresse mail valide.">
             <label for="email">Email *</label>
-            <input id="email" type="email" name="email" aria-label="email" placeholder="toto.dupont@gmail.com" aria-required="true" required>
+            <input id="email" type="email" name="email" aria-label="email" placeholder="pierre.dupont@gmail.com" aria-required="true" required>
           </li>
           <li class="formData" data-error-message="Veuillez entrer 2 caractères au minimum.">
             <label for="message">Votre message *</label>
@@ -101,9 +99,7 @@
       <button class="button modal-success__button js-modal-close js-form-reset" data-form="contact__form">Fermer</button>
     </div>
   </div>
-  <footer>
 
-  </footer>
   <script src="../dist/bundle.js"></script>
 </body>
 

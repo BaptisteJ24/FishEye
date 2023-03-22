@@ -4,7 +4,7 @@ import { updateLike } from "./components/likes.js";
 import * as photographerPage from "./dom/pages/photographer.js";
 import * as indexPage from "./dom/pages/index.js";
 import { openModal } from "./components/modal.js";
-import { validForm, checkFormData } from "./components/form.js";
+import { validForm, checkFormData, pushPhotographerName } from "./components/form.js";
 
 let loadPage = async () => { };
 let loadEvents = async () => { };
@@ -17,6 +17,7 @@ case "photographer": {
         await photographerPage.initPhotographerDetails();
         await photographerPage.initMedia();
         await photographerPage.initPhotographerTotalLikesAndPrice();
+        pushPhotographerName();
     };
 
     loadEvents = async () => {

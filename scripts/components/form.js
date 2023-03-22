@@ -1,5 +1,5 @@
 const regex = {
-    text: /^[a-zA-Z]{2,}$/,
+    text: /^[a-zA-ZÀ-ÿ\s-]{2,}$/,
     email: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 };
 
@@ -63,7 +63,7 @@ const validForm = (e) => {
     });
 
     if (validData(authorizedFormElements, data)) {
-        pushPhotographerName();
+        
         document.getElementsByClassName("modal-success")[0].classList.remove("hide");
         document.getElementsByClassName("modal-success")[0].removeAttribute("aria-hidden");
         document.getElementsByClassName("js-modal-form-empty")[0].classList.toggle("hide", true);
@@ -137,4 +137,4 @@ const pushPhotographerName = () => {
     modalSuccessName.textContent += photographerName;
 };
 
-export { validForm, resetForm, checkFormData };
+export { validForm, resetForm, checkFormData, pushPhotographerName };
