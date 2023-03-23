@@ -39,7 +39,7 @@ const mediaFactory = (data) => {
             const divDescription = document.createElement("div");
             divDescription.setAttribute("class", "media__description");
 
-            const textTitle = document.createElement("p");
+            const textTitle = document.createElement("h2");
             textTitle.setAttribute("class", "media__title");
             textTitle.textContent = title;
 
