@@ -11,6 +11,7 @@ Compétences :
 Fait par : Baptiste JAN
 
 Disponible sur : https://github.com/BaptisteJ24/FishEye/
+
 Visible à l'adresse : https://baptistej24.github.io/FishEye/
 
 Mis à jour le 20/03/2023.
